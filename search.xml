@@ -1,0 +1,1443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>FAQ-常见问题列表</title>
+    <url>/2021/01/25/ESP32/FAQ/</url>
+    <content><![CDATA[<h2 id="FAQ-常见问题列表"><a href="#FAQ-常见问题列表" class="headerlink" title="FAQ-常见问题列表"></a>FAQ-常见问题列表</h2><p><code>以下是常见的问题列表，在配置过程中，有不明白的地方先看看下边有没有你碰到的问题，如果还是解决不了再来问店主，不要上来就问，请先按步骤操作一遍后再来问，我不是专业卖家，我要上班的，不一定能及时回复信息，请理解，谢谢！</code></p>
+<blockquote>
+<p><strong>问：微信扫码后，提示配网超时</strong></p>
+<p>答：请确保手机连接的是2.4G WIFI，不支持5G 的WIFI 。</p>
+</blockquote>
+<blockquote>
+<p><strong>问：在和风天气申请的key在验证时提示无效（invaild key）的key怎么办？</strong></p>
+<p>答：请将输入框全部删除再粘贴即可</p>
+</blockquote>
+<blockquote>
+<p><strong>问：在和风天气申请的key在验证时提示无权限（permission denied）怎么办？</strong></p>
+<p>答：请实名认证为个人开发者即可</p>
+</blockquote>
+<blockquote>
+<p><strong>问：在和风天气申请的key提示无权限怎么办？</strong></p>
+<p>答：请实名认证为个人开发者即可</p>
+</blockquote>
+<blockquote>
+<p><strong>问：温度显示偏高怎么办</strong></p>
+<p>答：由于传感器装在壳子里，且里边芯片在工作时会发热等原因造成测的温度比实际值偏高，可以在设置里的其它页面里进行补偿</p>
+</blockquote>
+<blockquote>
+<p><strong>问：为什么我在浏览器里无法打开<a href="http://weather.local/">http://weather.local</a> 这个参数配置界面</strong></p>
+<p>答：此网址是mDNS解析，已经测试过谷歌Chrome，微软新版Edge，火狐Firefox,理论上其它基于chromium的浏览器也是没问题的</p>
+</blockquote>
+<blockquote>
+<p><strong>问：我不想装上边的推荐的主流浏览器怎么办？</strong></p>
+<p>答：那你可以查看设备最后一个关于图标，点进行，可以查看到IP地址，在浏览器里直接输入IP也可以打开参数设置界面</p>
+</blockquote>
+<blockquote>
+<p><strong>问：为什么我打开了参数配置界面后，点击按钮都没反应呢？</strong></p>
+<p>答：还是那句话，浏览器兼容性问题，请安装主流浏览器</p>
+</blockquote>
+<blockquote>
+<p><strong>问：为什么无法收到测试邮件？</strong></p>
+<p>答：邮箱设置如果你不是太清楚，可以使用里边默认的邮箱参数，只需要把下边的接收邮箱修改成你自己的即可，点击测试能收到邮件即可。需要注意的是接收邮箱前边的昵称和中间的冒号，昵称可以随便填，但是那个冒号必须是<strong>英文冒号</strong>不能是<strong>中文的冒号</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>问：为什么参数设置好后，重启就没有了？</strong></p>
+<p>答：参数测试完毕，需要点击一下下边的提交按钮，然后再点击重启即可生效</p>
+</blockquote>
+<blockquote>
+<p><strong>问：为什么我下载的更新软件(flasher-esp32-T4-x-x-x.exe)提示有病毒？</strong></p>
+<p>答：这个程序是用pyinstaller 把python程序打包成Windows可执行程序exe，可能是因为调用了系统进程，被杀毒软件拦截报毒，实际是没有问题，请放心使用</p>
+</blockquote>
+<blockquote>
+<p><strong>问：为什么我下载的更新软件（flasher-esp32-T4-x-x-x.exe）一闪而过？</strong></p>
+<p>答：请安装python3运行环境，记得把添加到环境变量打上勾   <a href="https://www.python.org/ftp/python/3.9.1/python-3.9.1-embed-amd64.zip">python3.91 x64 官方下载</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>ESP32桌面气象站-LCD触控版</category>
+      </categories>
+      <tags>
+        <tag>ESP32</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>桌面气象站使用手册</title>
+    <url>/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/</url>
+    <content><![CDATA[<h2 id="设备上电"><a href="#设备上电" class="headerlink" title="设备上电"></a>设备上电</h2><hr>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">设备使用5V供电，使用 Micro USB 或Type C 接口的连接线</span><br></pre></td></tr></table></figure>
+<h2 id="设备配网"><a href="#设备配网" class="headerlink" title="设备配网"></a>设备配网</h2><hr>
+<p>设备在上电时在30秒内未连接到网络上，<del>会自动进入AP模式</del>，会显示两个按钮，一个热点配网，一个是二维码配网，可自由选择配网方式。</p>
+<ul>
+<li><p>热点配网</p>
+<blockquote>
+<p>用手机或者电脑 连接一个叫<code>ESP-Weather-Station</code>的热点，密码是<code>12345678</code> 连接上后 在浏览器地址栏里输入<code>192.168.4.1</code> 会打开一个配网页面 如下图所示 </p>
+</blockquote>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image7.png" class="" title="配网">
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image5.png" class="" title="配网"></li>
+<li><p>扫码配网</p>
+<blockquote>
+<p>打开微信扫一扫，扫描屏幕显示的二维码，按照提示输入wifi密码进行配网，设备接收到密码后会自动重启 使用新的WiFi名称和密码连接网络</p>
+</blockquote>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image6.png" class="" title="配网"></li>
+<li><p>APP配网</p>
+<blockquote>
+<p>安装官方ESPTOUCH 配网工具进行配网 <a href="https://www.espressif.com/zh-hans/products/software/esp-touch/resources">乐鑫官方连接</a></p>
+</blockquote>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/esptouch.png" class="" title="配网">
+
+</li>
+</ul>
+<p>可以点击扫描网络，选择一个网络输入密码，点击提交后，机器会重启，然后开始连接网络</p>
+<h2 id="天气key申请"><a href="#天气key申请" class="headerlink" title="天气key申请"></a>天气key申请</h2><hr>
+<p>到<a href="https://id.qweather.com/#/register?redirect=https%3A%2F%2Fconsole.qweather.com">和风天气官网</a>申请帐号，注册成功后，登录进后台，点击<code>和风天气开发者控制台</code>进入</p>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image1.png" class="">
+
+<p>在左侧找到 <code>应用管理</code> 点击右侧<code>创建应用</code> 名称随意填，选择<code>免费开发版</code> 😊 点击保存后，会得到下图所示的KEY</p>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image2.png" class="" title="KEY">
+<p>将这个KEY保存下来，后边获取设置天气参数需要用到</p>
+<p>目前申请的key 根据大家反应，得需要实名谁才能正常获取天气，请大家注意</p>
+<h2 id="设备参数设置"><a href="#设备参数设置" class="headerlink" title="设备参数设置"></a>设备参数设置</h2><hr>
+<p>在浏览器里输入<a href="http://weather.local/">http://weather.local</a> 注意要完整输入 不是https  用户名和密码都是admin  会打开如下 所示的页面</p>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image3.png" class="" title="主页">
+
+<p>这里的参数根据需要进行填写即可</p>
+<h3 id="闹钟使用说明"><a href="#闹钟使用说明" class="headerlink" title="闹钟使用说明"></a>闹钟使用说明</h3><hr>
+<ul>
+<li>闹钟支持单次和重复功能<ol>
+<li>单次指支指定时间只响一次，一次响5分钟，在闹钟响时可以点击一次触摸屏停止报警</li>
+<li>重复指每天到达指定时间都会响起，要关闭报警可以触摸一次屏幕关闭，如果不关闭，5分钟后自动关闭</li>
+</ol>
+</li>
+</ul>
+<h3 id="天气功能使用说明"><a href="#天气功能使用说明" class="headerlink" title="天气功能使用说明"></a>天气功能使用说明</h3><hr>
+<p>将前边获取到的KEY填进APP key 里，然后可以点击验证看是否正确，如果能返回经纬度坐标，说明网络没有问题，下边的坐标名称可以修改成你想显示的内容，这个坐标名称就是显示在气象站屏幕右上角的内容，更新频率可以自由修改</p>
+<h3 id="温湿度报警说明"><a href="#温湿度报警说明" class="headerlink" title="温湿度报警说明"></a>温湿度报警说明</h3><hr>
+<ul>
+<li>温度报警选择蜂鸣器报警，在达到指定条件时，会触发蜂鸣器间隔0.35S声音，此时点击屏幕可以关掉，如果不关，在5分钟后自动关闭</li>
+<li>温度报警选择语音播报，在达到指定条件时，会触发一次语音报时，从喇叭里发出，播放完毕即结束</li>
+<li>温度报警选择邮件通知时，在达到指定条件时，会自动发出一封邮件到指定邮箱，如果想在微信里收到，可以使用qq邮箱，其它的邮箱请使用客户端进行收取</li>
+</ul>
+<h3 id="常用邮箱参数"><a href="#常用邮箱参数" class="headerlink" title="常用邮箱参数"></a>常用邮箱参数</h3><td class="d-block comment-body markdown-body  js-comment-body">
+          <p>网易系邮件配置如下：<br>
+<a rel="nofollow" href="http://help.163.com/10/0731/11/6CTUBPT300753VB8.html">http://help.163.com/10/0731/11/6CTUBPT300753VB8.html</a></p>
+<blockquote>
+<p>163邮箱的收取邮件支持POP/IMAP两种协议，发送邮件采用SMTP协议<br>
+收件和发件均使用SSL协议来进行加密传输，采用SSL协议需要单独对帐户进行设置<br>
+采用SSL协议和非SSL协议时端口号有所区别，参照下表的一些常见配置组合:</p>
+</blockquote>
+<table>
+    <thead>
+        <tr>
+            <th>类型</th>
+            <th>服务器名称</th>
+            <th>服务器地址</th>
+            <th>SSL协议端口号</th>
+            <th>非SSL协议端口号</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>收件服务器</td>
+        <td>POP</td>
+        <td>pop.163.com</td>
+        <td>995</td>
+        <td>110</td>
+    </tr>
+    <tr>
+        <td>收件服务器</td>
+        <td>IMAP</td>
+        <td>imap.163.com</td>
+        <td>993</td>
+        <td>143</td>
+    </tr>
+    <tr>
+        <td>发件服务器</td>
+        <td>SMTP</td>
+        <td>smtp.163.com</td>
+        <td>465/994</td>
+        <td>25</td>
+    </tr>
+    </tbody>
+</table>
+]]></content>
+      <categories>
+        <category>ESP32桌面气象站-LCD触控版</category>
+      </categories>
+      <tags>
+        <tag>ESP32</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>固件更新记录---持续更新</title>
+    <url>/2020/12/26/ESP32/update/</url>
+    <content><![CDATA[
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>固件更新记录时间轴</title>
+<link rel="stylesheet" href="style.css" />
+<style type="text/css">
+h2.top_title{border-bottom:none;background:none;text-align:center;line-height:32px; font-size:20px}
+h2.top_title span{font-size:12px; color:#666;font-weight:500}
+</style>
+</head>
+<body>
+<h2 class="top_title"><a href="javascript:void(0);">4.0触屏版</a><br/></h2>
+<section id="cd-timeline" class="cd-container">
+	<div class="cd-timeline-block">
+		<div class="cd-timeline-img cd-code">
+			<img src="/2020/12/26/ESP32/update/img/cd-icon-code.svg" alt="CODE">
+		</div>
+		<div class="cd-timeline-content">
+			<h2>V1.0.7</h2>
+			<p>+ 增加了微信扫码配网,在启动时可以选择热点配网和一键配网</p>
+			<p>+ 增加温湿度补偿功能，由于传感器封在壳子里及设备发热等因素，会比实际值偏高一点</p>
+			<p><a href="/2020/12/26/ESP32/update/flasher-esp32-t4-1-0-7.exe">点击下载</a></p>
+			<p style="color: red;">*注意:软件为x64位平台，不支持32位平台，需要python3运行环境 </p>
+			<p style="color: red;">*注意:软件可能会被杀毒软件拦截，请放行 </p>
+			<span class="cd-date">2021/01/23</span>
+		</div>
+	</div>
+	<div class="cd-timeline-block">
+		<div class="cd-timeline-img cd-code">
+			<img src="/2020/12/26/ESP32/update/img/cd-icon-code.svg" alt="CODE">
+		</div>
+		<div class="cd-timeline-content">
+			<h2>V1.0.6</h2>
+			<p>+ 数字时钟界面增加温度及节日，界面变化在设备界面展示那一个文档展示</p>
+			<p>+ 优化未来6天温度趋势图的显示</p>
+			<p>+ 优化GPS对时逻辑 第一次对时成功会滴一声</p>
+			<p>+ 增加PCF8563 or BM8563 RTC支持</p>
+			<p>- 修改在没有网络时不再自动进入热点模式 没有网络也可以使用</p>
+			<p>+ 启动界面添加倒计时功能 在启动时可以按下下载键进入热点配网模式</p>
+			<p><a href="#">点击下载</a></p>
+			<span class="cd-date">2021/01/14</span>
+		</div>
+	</div>
+	<div class="cd-timeline-block">
+		<div class="cd-timeline-img cd-code">
+			<img src="/2020/12/26/ESP32/update/img/cd-icon-code.svg" alt="CODE">
+		</div>
+		<div class="cd-timeline-content">
+			<h2>V1.0.5</h2>
+			<p>+ 增加启动时自动检查版本更新，由于固件太大，无法OTA，请下载后通过串口更新 </p>
+			<p>+ 添加烧录软件，无需进行任何设置即可更新程序，见下载连接 </p>
+			<p>+ 增加GPS数据解析，实现GPS对时功能</p>
+			<p>+ 增加启动时自动检查版本及更新记录</p>
+			<p>+ 硬件电路增加一键自动下载功能</p>
+			<p>+ 添加主界面月相名称显示</p>
+			<p>+ 增加5组闹钟，共计支持6组闹钟</p>
+			<p>- 修复不在闹钟界面时，闹钟不响的问题</p>
+			<p>- 闹钟响时，点击一下屏幕即可关闭</p>
+			<p>- 增加阴历节日及倒计时功能</p>
+			<p>- 修复温度曲线显示会超出显示范围问题</p>
+			<p>+ 增加背光依据设定时间自动调整功能</p>
+			<p><a href="#">点击下载</a></p>
+			<span class="cd-date">2021/01/03</span>
+		</div>
+	</div>
+	<div class="cd-timeline-block">
+		<div class="cd-timeline-img cd-code">
+			<img src="/2020/12/26/ESP32/update/img/cd-icon-code.svg" alt="CODE">
+		</div>
+
+		<div class="cd-timeline-content">
+			<h2>V1.0.4</h2>
+			<p>- 修复到达一年中最后一个节日 进入含有节日倒计时的界面导致重启的问题 </p>
+			<p>+ 在万年历界面的节日倒计时，添加当天的节日显示 </p>
+			<p>- 修复语音不能正确报时的问题 开机会播报一下当前时段</p>
+			<p>+ 在web配置界面->其它->语音报时下增加一个播报开关，并添加一个测试按钮，点击会播报当时的小时 </p>
+			<p>- 修复邮件通知导致系统重启问题，邮件默认使用xfdr0805@126.com发送邮件，可以更换成你自己的邮箱，接收邮箱格式 `名称:826220967@qq.com` 前边的名称是后边对应邮箱地址的别名，里边的分号必须是英文的分号 推荐使用QQ邮箱 因为可以在微信及时收到 </p>
+			<p>- 由于配置文件变化 这两个文件都要更新 </p>
+			<p><a href="#">CODE点击下载</a></p>
+			<p><a href="#">SPIFFS点击下载</a></p>
+			<span class="cd-date">2020-12-26</span>
+		</div>
+	</div>
+</section>
+
+
+</body>
+</html>]]></content>
+      <categories>
+        <category>ESP32桌面气象站-LCD触控版</category>
+      </categories>
+      <tags>
+        <tag>ESP32</tag>
+        <tag>firmware</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>程序更新步骤</title>
+    <url>/2020/12/22/ESP32/%E6%9B%B4%E6%96%B0%E7%A8%8B%E5%BA%8F/</url>
+    <content><![CDATA[<h2 id="更新步骤"><a href="#更新步骤" class="headerlink" title="更新步骤"></a>更新步骤</h2><hr>
+<h3 id="更新主程序"><a href="#更新主程序" class="headerlink" title="更新主程序"></a>更新主程序</h3><ul>
+<li><p>1.先从官网下载ESP Flash Down Tool <a href="https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.5.zip">下载地址</a></p>
+</li>
+<li><p>2.打开上一步下载的软件 ，选择 Developer Mode</p>
+</li>
+<li><p>3.选择ESP32 DownloadTool</p>
+</li>
+<li><p>4.加载firemware.bin 地址0x10000</p>
+</li>
+<li><p>5.按下图参数设置   </p>
+<img src="/2020/12/22/ESP32/%E6%9B%B4%E6%96%B0%E7%A8%8B%E5%BA%8F/esp_firmware.png" class=""></li>
+<li><p>6.按下图操作 <strong>非常关键的一步</strong>   </p>
+<img src="/2020/12/22/ESP32/%E6%9B%B4%E6%96%B0%E7%A8%8B%E5%BA%8F/enter_down.jpg" class="">
+</li>
+<li><p>firmware.bin<a href="./firmware.bin" target="_blank">下载链接</a></p>
+</li>
+</ul>
+<h3 id="更新Flash内容"><a href="#更新Flash内容" class="headerlink" title="更新Flash内容"></a>更新Flash内容</h3><hr>
+<ul>
+<li><p>1.先从官网下载ESP Flash Down Tool <a href="https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.5.zip">下载地址</a></p>
+</li>
+<li><p>2.打开上一步下载的软件 ，选择 Developer Mode</p>
+</li>
+<li><p>3.选择ESP32 DownloadTool</p>
+</li>
+<li><p>4.加载spiffs.bin 地址0x250000</p>
+</li>
+<li><p>5.按下图参数设   </p>
+ <img src="/2020/12/22/ESP32/%E6%9B%B4%E6%96%B0%E7%A8%8B%E5%BA%8F/flashtool.png" class=""></li>
+<li><p>6.按下图操作 <strong>非常关键的一步</strong>   </p>
+ <img src="/2020/12/22/ESP32/%E6%9B%B4%E6%96%B0%E7%A8%8B%E5%BA%8F/enter_down.jpg" class="">
+</li>
+<li><p>spiffs.bin<a href="./spiffs.bin" target="_blank">下载链接</a></p>
+</li>
+</ul>
+<h3 id="更新全部"><a href="#更新全部" class="headerlink" title="更新全部"></a>更新全部</h3><p><code>如果烧写地址填错，分区会被破坏，必须重新烧录分区及引导程序，可以按以下设置重新烧录即可</code></p>
+<ul>
+<li><p>1.加载partition.bin  地址:0x8000</p>
+</li>
+<li><p>2.加载BootLoader_DIO_80m_bin 地址:0x1000</p>
+</li>
+<li><p>3.按下图设置好   </p>
+ <img src="/2020/12/22/ESP32/%E6%9B%B4%E6%96%B0%E7%A8%8B%E5%BA%8F/flash_partion.png" class="">
+</li>
+<li><p>bootloader_dio_80m.bin<a href="./bootloader_dio_80m.bin" target="_blank">下载链接</a></p>
+</li>
+<li><p>partitions.bin<a href="./partitions.bin" target="_blank">下载链接</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>ESP32桌面气象站-LCD触控版</category>
+      </categories>
+      <tags>
+        <tag>ESP32</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设备界面预览</title>
+    <url>/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/</url>
+    <content><![CDATA[<h3 id="设备界面"><a href="#设备界面" class="headerlink" title="设备界面"></a>设备界面</h3><hr>
+<p>下边是设备界面展示，具体以收到的实物为准  </p>
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/image7.png" class="" title="image1">
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/image6.png" class="" title="image1">
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/image1.png" class="" title="image1">
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/image2.png" class="" title="image1">
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/image5.png" class="" title="image1">
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/image3.png" class="" title="image1">
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/image4.png" class="" title="image1">
+
+<p><code>程序随时可能会升级，界面会稍有变化，具体以实物为准</code></p>
+<h3 id="语音播报素材"><a href="#语音播报素材" class="headerlink" title="语音播报素材"></a>语音播报素材</h3><hr>
+<ul>
+<li>甜美语音包<a href="./voice.rar" target="_blank">下载链接</a></li>
+<li><del>语音更新工具</del><a href="./语音合成工具.rar" target="_blank"><del>下载链接</del></a></li>
+</ul>
+<p><code>以上素材来源于网络，如果大家有更好有素材，可以发送到xfdr0805@126.com 邮箱，测试OK我会更新到设备里</code></p>
+<h3 id="设备外观"><a href="#设备外观" class="headerlink" title="设备外观"></a>设备外观</h3><hr>
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/front.jpg" class="" title="front">
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/back.jpg" class="" title="back">
+
+<p><code>外壳为3D打印，材料为树脂或PLA，由于是3D打印，所以无法与使用模具做出来的产品相比较，难免会有瑕疵</code></p>
+<h3 id="设备尺寸"><a href="#设备尺寸" class="headerlink" title="设备尺寸"></a>设备尺寸</h3><hr>
+<ul>
+<li>PCB尺寸<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/pcb_skill.png" class="" title="pcb_skill">
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/pcb_3d.png" class="" title="pcb_3d"></li>
+<li>外壳尺寸<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/box_size.png" class="" title="box_size">
+<img src="/2020/12/22/ESP32/%E8%AE%BE%E5%A4%87%E7%95%8C%E9%9D%A2/box.png" class="" title="box"></li>
+<li>3D打印文件<a href="./3D打印文件.rar" target="_blank">下载链接</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>ESP32桌面气象站-LCD触控版</category>
+      </categories>
+      <tags>
+        <tag>ESP32</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>支持的功能列表</title>
+    <url>/2020/12/22/ESP32/%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E/</url>
+    <content><![CDATA[<h3 id="4-0触屏版-支持的功能列表"><a href="#4-0触屏版-支持的功能列表" class="headerlink" title="4.0触屏版 支持的功能列表"></a>4.0触屏版 支持的功能列表</h3><hr>
+<ul>
+<li>支持未来6天及实况天气预报，更新频率参数可以配置</li>
+<li>支持硬件时钟，断电或没网络 超时也准确</li>
+<li>支持GPS对时</li>
+<li>支持实时温湿度传感器</li>
+<li>支持模拟时钟，数字时钟</li>
+<li>支持6组闹钟,可以设置单次与重复</li>
+<li>支持cron表达式 (非常强大灵活的定时功能)</li>
+<li>支持温湿度报警 可选蜂鸣器，语音，邮件通知</li>
+<li>支持万年历,倒计时</li>
+<li>支持节日提醒 </li>
+<li>支持十二生肖 天干地支 24节气 时辰</li>
+<li>支持语音报时，可自己修改语音</li>
+<li>支持触摸功能</li>
+<li>配网支持热点配网和扫码配网</li>
+</ul>
+]]></content>
+      <categories>
+        <category>ESP32桌面气象站-LCD触控版</category>
+      </categories>
+      <tags>
+        <tag>ESP32</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>墨水屏气象站</title>
+    <url>/2021/01/26/ESP32-Epaper/index/</url>
+    <content><![CDATA[<h3 id="ESP32桌面气象站-墨水屏版-正在开发中"><a href="#ESP32桌面气象站-墨水屏版-正在开发中" class="headerlink" title="ESP32桌面气象站-墨水屏版  正在开发中"></a>ESP32桌面气象站-墨水屏版  正在开发中</h3>]]></content>
+      <categories>
+        <category>ESP32桌面气象站-墨水屏版</category>
+      </categories>
+      <tags>
+        <tag>ESP32</tag>
+        <tag>epaper</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Sonoff-1CH</title>
+    <url>/2020/12/29/HomeKit/sonoff-1ch/</url>
+    <content><![CDATA[<hr>
+<h3 id="待续…"><a href="#待续…" class="headerlink" title="待续…"></a>待续…</h3>]]></content>
+      <categories>
+        <category>homekit</category>
+      </categories>
+      <tags>
+        <tag>sonoff</tag>
+        <tag>1ch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Sonoff-2CH</title>
+    <url>/2020/12/28/HomeKit/sonoff-2ch/</url>
+    <content><![CDATA[<hr>
+<h3 id="待续…"><a href="#待续…" class="headerlink" title="待续…"></a>待续…</h3>]]></content>
+      <categories>
+        <category>homekit</category>
+      </categories>
+      <tags>
+        <tag>sonoff</tag>
+        <tag>2ch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Sonoff-4CH</title>
+    <url>/2020/12/26/HomeKit/sonoff-4ch/</url>
+    <content><![CDATA[<hr>
+<h3 id="待续…"><a href="#待续…" class="headerlink" title="待续…"></a>待续…</h3>]]></content>
+      <categories>
+        <category>homekit</category>
+      </categories>
+      <tags>
+        <tag>sonoff</tag>
+        <tag>4ch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>web配置界面在线体验</title>
+    <url>/2020/12/26/ESP32/webpage/</url>
+    <content><![CDATA[
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://s0.pstatp.com/cdn/expire-1-M/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet">
+    <link href="https://s3.pstatp.com/cdn/expire-1-M/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css"
+        rel="stylesheet">
+    <link href="https://s1.pstatp.com/cdn/expire-1-M/bootstrap-slider/10.6.1/css/bootstrap-slider.min.css"
+        rel="stylesheet">
+    <link href="https://s1.pstatp.com/cdn/expire-1-M/pretty-checkbox/3.0.3/pretty-checkbox.min.css" rel="stylesheet">
+    <title>WIFI桌面气象站</title>
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            /* Set the fixed height of the footer here */
+            line-height: 60px;
+            /* Vertically center the text there */
+            background-color: #f5f5f5;
+        }
+
+        #brightness-slider .slider-selection {
+            background: rgb(0, 155, 245);
+        }
+
+        label {
+            margin-top: 8px;
+        }
+
+        strong {
+            font-size: 1.3em;
+            color: cornflowerblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3 style="text-align:center;color: dodgerblue">WIFI桌面气象站</h3>
+    <div class="container" style="width:600px;">
+        <div id="he-plugin-standard"></div>
+        <br>
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#_home" data-toggle="tab">网络设置</a></li>
+            <li><a href="#_alarm" data-toggle="tab">闹钟设置</a></li>
+            <li><a href="#_weather" tabindex="-1" data-toggle="tab">天气配置</a></li>
+            <li><a href="#_tips" tabindex="-1" data-toggle="tab">备忘录</a></li>
+            <li><a href="#_temp" tabindex="-1" data-toggle="tab">温湿度</a></li>
+            <li><a href="#_other" tabindex="-1" data-toggle="tab">其它</a></li>
+            <li><a href="#_about" tabindex="-1" data-toggle="tab">关于</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="_home">
+                <form>
+                    <br>
+                    <strong>WiFi设置:</strong>
+                    <hr>
+                    <div id="static_ip">
+                        <div class="form-group row">
+                            <label for="ip" class="col-sm-4 col-form-label">无线网络:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="ssid" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mask" class="col-sm-4 col-form-label">WiFi密码:</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="password" placeholder="长度16个字符以内">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <strong>邮箱设置:</strong>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="ip" class="col-sm-4 col-form-label">SMTP服务器:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="email_host" placeholder="smtp.126.com">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ip" class="col-sm-4 col-form-label">服务器端口:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="email_port" placeholder="25">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mask" class="col-sm-4 col-form-label">用户名:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="email_user" placeholder="xxxx@126.com">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mask" class="col-sm-4 col-form-label">密码:</label>
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control" id="email_pwd" placeholder="邮箱登录密码">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mask" class="col-sm-4 col-form-label">接收邮箱:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="email_rcv" placeholder="多个请用英文逗号(,)隔开">必须英文分号:
+                        </div>
+                        <a type="button" class="btn btn-success" style="margin-left:10px"  id="set_email">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                    </div>
+
+                </form>
+            </div>
+            <div class="tab-pane fade" id="_alarm">
+                <form>
+                    <br>
+                    <strong>闹钟设置:</strong>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="status" class="col-sm-4 col-form-label">开关:</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <input type="checkbox" checked id="status" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="datetime" class="col-sm-4 col-form-label">模式:</label>
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <div class="pretty p-default p-round p-thick">
+                                    <input type="radio" id="repeat" onclick="radio_click()" name="alarm" checked />
+                                    <div class="state p-primary-o">
+                                        <label>重复</label>
+                                    </div>
+                                </div>
+                                <label class="radio-inline"></label>
+                                <label class="radio-inline"></label>
+                                <div class="pretty p-default p-round p-thick">
+                                    <input type="radio" id="repeat2" onclick="radio_click()" name="alarm" />
+                                    <div class="state p-primary-o">
+                                        <label>单次</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="date_row" hidden>
+                        <label for="datetime" class="col-sm-4 col-form-label">日期:</label>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" value="" class="form-control" id="date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="datetime" class="col-sm-4 col-form-label">时间:</label>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" value="" class="form-control" id="time">
+                            </div>
+                        </div>
+                        <a type="button" class="btn btn-success" id="set_alarm">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                    </div>
+                    <br>
+                    <strong>RTC设置:</strong>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="rtc_time" class="col-sm-4 col-form-label">修改时间:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="rtc_time">
+                        </div>
+                        <a type="button" data-toggle="tooltip" title="使用本机时间设置RTC" class="btn btn-warning" id="set_rtc_time">本机时间</a>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="_weather">
+                <br>
+                    <strong>天气API接口配置:</strong>
+                    <hr>
+                    <div>
+                        <div class="form-group row">
+                            <label for="city" class="col-sm-4 col-form-label">经纬度坐标:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="city_location" placeholder="获取的经纬度粘贴到此处">
+                            </div>
+                            <a class="btn btn-primary" href="https://lbs.amap.com/console/show/picker" target="_blank">地图取点</a>
+                        </div>
+                        <div class="form-group row">
+                            <label for="city" class="col-sm-4 col-form-label">坐标名称:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="city_name" placeholder="代表坐标的名称">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="app_key" class="col-sm-4 col-form-label">APP Key:</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="app_key" placeholder="app key">
+                            </div>
+                            <a type="button" class="btn btn-warning" id="check">&nbsp;&nbsp;验&nbsp;&nbsp;&nbsp;证&nbsp;&nbsp;</a>
+                        </div>
+                        <div class="form-group row">
+                            <label for="sign" class="col-sm-4 col-form-label">更新频率:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="update_period" placeholder="单位分钟">
+                            </div>
+                            1~120分钟
+                        </div>
+                        
+                    </div>
+            </div>
+            <div class="tab-pane fade" id="_tips">
+                
+                <br>
+                <strong>备忘录:</strong>
+                <hr>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-4 col-form-label">内容:</label>
+                    <div class="col-sm-6">
+                        <textarea type="text" maxlength="40" placeholder="长度不超过40个英文字符或20个中文" class="form-control" id="tips"></textarea>
+                    </div>
+                    <a type="button" class="btn btn-success" id="set_tips">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                </div>
+                <br>
+                <strong>待办事项:</strong>
+                <hr>
+                <div class="form-group row">
+                    <!-- <label for="server" class="col-sm-1 col-form-label"></label> -->
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="1.长度不超过60个英文字符或30个中文" class="form-control"maxlength="60"id="to-do-list-1"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!-- <label for="server" class="col-sm-1 col-form-label">2.</label> -->
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="2.长度不超过60个英文字符或30个中文" class="form-control" maxlength="60" id="to-do-list-2"></input>
+                    </div>
+                </div>
+                                <div class="form-group row">
+                    <!-- <label for="server" class="col-sm-1 col-form-label">2.</label> -->
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="3.长度不超过60个英文字符或30个中文" class="form-control" maxlength="60"  id="to-do-list-3"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!-- <label for="server" class="col-sm-1 col-form-label">2.</label> -->
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="4.长度不超过60个英文字符或30个中文" class="form-control" maxlength="60" id="to-do-list-4"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!-- <label for="server" class="col-sm-1 col-form-label">2.</label> -->
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="5.长度不超过60个英文字符或30个中文" class="form-control" maxlength="60" id="to-do-list-5"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!-- <label for="server" class="col-sm-1 col-form-label">2.</label> -->
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="6.长度不超过60个英文字符或30个中文" class="form-control" maxlength="60" id="to-do-list-6"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!-- <label for="server" class="col-sm-1 col-form-label">2.</label> -->
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="7.长度不超过60个英文字符或30个中文" class="form-control" maxlength="60" id="to-do-list-7"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!-- <label for="server" class="col-sm-1 col-form-label">2.</label> -->
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="8.长度不超过60个英文字符或30个中文" class="form-control" maxlength="60" id="to-do-list-8"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!-- <label for="server" class="col-sm-1 col-form-label">2.</label> -->
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="9.长度不超过60个英文字符或30个中文" class="form-control" maxlength="60" id="to-do-list-9"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!-- <label for="server" class="col-sm-1 col-form-label">2.</label> -->
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="10.长度不超过60个英文字符或30个中文" class="form-control" maxlength="60" id="to-do-list-10"></input>
+                    </div>
+                </div>
+                <a type="button" class="btn btn-success" id="set_to_do_list">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+            </div>
+            <div class="tab-pane fade" id="_other">
+                <br>
+                <strong>屏幕亮度:</strong>
+                <hr>
+                <br>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-4 col-form-label">亮度:</label>
+                    <div class="col-sm-6">
+                        <div style="height: auto;">
+                            <strong>0</strong>
+                            <input id="brightness" data-slider-id='brightness-slider' type="text" data-slider-min="0"
+                                data-slider-max="100" data-slider-step="1" data-slider-value="50" />
+                            <strong>100</strong>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <strong>播报时段:</strong>
+                <hr>
+                <br>
+                <div class="form-group row">
+                    <label for="status" class="col-sm-4 col-form-label">开关:</label>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <input type="checkbox" checked id="voice_status" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-4 col-form-label">时段:</label>
+                    <div class="col-sm-6">
+                        <div style="height: auto;">
+                            <strong>0&nbsp;&nbsp;</strong>
+                            <input id="voice-slider"type="text"/>
+                            <strong>&nbsp;&nbsp;23</strong>
+                        </div>
+                    </div>
+                    <a type="button" class="btn btn-success" id="set_voice">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                </div>
+                <br>
+                <strong>默认页面:</strong>
+                <hr>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-4 col-form-label">选择页面:</label>
+                    <div class="col-sm-6">
+                        <select id="default_page" class="form-control">
+                            <option value="0">桌面</option>
+                            <option value="1">气象站</option>
+                            <option value="2">万年历</option>
+                            <option value="3">空气质量</option>
+                            <option value="4">模拟时钟</option>
+                            <option value="5">数字时钟</option>
+                            <option value="6">温湿度</option>
+                            <option value="7">备忘录</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="_temp">
+                <br>
+                <strong>温度报警设置:</strong>
+                <hr>
+                <div class="form-group row">
+                <label for="temp_alarm" class="col-sm-4 col-form-label">开关:</label>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="checkbox"  id="temp_alarm" />
+                    </div>
+                </div>
+                </div>
+                 <div class="form-group row">
+                <label for="temp_alarm" class="col-sm-4 col-form-label">条件:</label>
+                <div class="col-sm-4">
+                    <select id="temp_exp" class="form-control">
+                        <option value="&gt;">大于</option>
+                        <option value="&gt;=">大于等于</option>
+                        <option value="=">等于</option>
+                        <option value="&lt;">小于</option>
+                        <option value="&lt;=">小于等于</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="temp">
+                </div>
+                 </div>
+                <div class="form-group row">
+                    <label for="temp_alarm" class="col-sm-4 col-form-label">动作:</label>
+                    <div class="col-sm-4">
+                        <select id="temp_alarm_action" class="form-control">
+                            <option value="0">蜂鸣报警</option>
+                            <option value="1">语音报警</option>
+                            <option value="2">邮件通知</option>
+                        </select>
+                    </div>
+                    <a type="button" class="btn btn-success" style="margin-left:10px"  id="set_temp_alarm">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                </div>
+                <br>
+                <strong>湿度报警设置:</strong>
+                <hr>
+                <div class="form-group row">
+                <label for="huim_alarm" class="col-sm-4 col-form-label">开关:</label>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="checkbox"  id="huim_alarm" />
+                    </div>
+                </div>
+                </div>
+                 <div class="form-group row">
+                <label for="huim_alarm" class="col-sm-4 col-form-label">条件:</label>
+                <div class="col-sm-4">
+                    <select id="huim_exp" class="form-control">
+                        <option value="&gt;">大于</option>
+                        <option value="&gt;=">大于等于</option>
+                        <option value="=">等于</option>
+                        <option value="&lt;">小于</option>
+                        <option value="&lt;=">小于等于</option>
+                    </select>   
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="huim">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="huim_alarm" class="col-sm-4 col-form-label">动作:</label>
+                <div class="col-sm-4">
+                    <select id="huim_alarm_action" class="form-control">
+                        <option value="0">蜂鸣报警</option>
+                        <option value="1">语音报警</option>
+                        <option value="2">邮件通知</option>
+                    </select>
+                </div>
+                <a type="button" class="btn btn-success" style="margin-left:10px"  id="set_huim_alarm">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="_about">
+                <!-- <h3 style="color: darkcyan;">ESP32 多功能桌面气象站</h3> -->
+                <p>使用文档位置: <a href="https://xfdr0805.github.io" target="_blank">电梯直达</a></p>
+                <p>如果不能访问,请访问这个连接: <a href="https://xfdr0805.gitee.io" target="_blank">准备起飞</a></p>
+                <br>
+                <br>
+
+                <p style="color: darkcyan;">导入导出配置文件 --- 暂未实现</p>
+                    <a type="button" class="btn btn-success" style="margin-left:10px"  id="export">导出配置</a>
+                <br>
+                <br>
+                <a type="button" class="btn btn-success" style="margin-left:10px"  id="import">导入配置</a>
+             </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label for="confirm" class="col-sm-4 col-form-label"></label>
+            <div class="col-sm-6">
+                <a type="button" class="btn btn-info"
+                    id="confirm">&nbsp;&nbsp;提&nbsp;&nbsp;&nbsp;交&nbsp;&nbsp;</a>
+                <a type="button" class="btn btn-danger" style="margin-left: 60px;"
+                    id="restart">&nbsp;&nbsp;重&nbsp;&nbsp;&nbsp;启&nbsp;&nbsp;</a>
+            </div>
+        </div>
+    </div>
+    <div style="height: 60px;"></div>
+    <footer class="footer">
+        <div class="container">
+            <div style="text-align: center">Copyright 2020-2030 xfdr0805 All Rights Reserved.</div>
+        </div>
+    </footer>
+    <script src="https://widget.heweather.net/standard/static/js/he-standard-common.js?v=1.1"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/layer.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://s1.pstatp.com/cdn/expire-1-M/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="https://s3.pstatp.com/cdn/expire-1-M/bootstrap-slider/10.6.1/bootstrap-slider.min.js"></script>
+    <script
+        src="https://s2.pstatp.com/cdn/expire-1-M/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script src="https://s0.pstatp.com/cdn/expire-1-M/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
+
+</body>
+
+<script>
+    WIDGET = {
+        CONFIG: {
+            "layout": 1,
+            "width": 575,
+            "height": 150,
+            "background": 1,
+            "dataColor": "FFFFFF",
+            "borderRadius": 5,
+            "key": "165c030ef5484bc9a3781a339b125a3e"
+        }
+    }
+    $("#status,#temp_alarm,#huim_alarm,#voice_status").bootstrapSwitch({
+        onText: "ON", // 设置ON文本 ?
+        offText: "OFF", // 设置OFF文本 ?
+        onColor: "success", // 设置ON文本颜色 ? ? (info/success/warning/danger/primary) ?
+        offColor: "danger", // 设置OFF文本颜色 ? ? ? ?(info/success/warning/danger/primary) ?
+        size: "normal", // 设置控件大小,从小到大 ?(mini/small/normal/large) ?
+        // 当开关状态改变时触发 ?
+        onSwitchChange: function (event, state) {
+            if (state == true) {
+                //layer.alert("ON");
+                $(this).val(true);
+            } else {
+                //layer.alert("OFF");
+                $(this).val(false);
+            }
+        }
+    });
+    var cnt_rtc = 0;
+    var cnt_ntp = 0;
+    $(function(){
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            // 获取已激活的标签页的名称
+            var activeTab = $(e.target).text(); 
+            // 获取前一个激活的标签页的名称
+            var previousTab = $(e.relatedTarget).text(); 
+            $(".active-tab span").html(activeTab);
+            $(".previous-tab span").html(previousTab);
+        });
+    });
+    $(document).ready(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: "/get_config",
+            data: "",
+            dataType: 'json',
+            success: function (data) {
+                $("#ssid").val(data["wifi"]["ssid"]);
+                $("#password").val(data["wifi"]["password"]);
+                $("#email_host").val(data["email"]["host"]);
+                $("#email_port").val(data["email"]["port"]);
+                $("#email_user").val(data["email"]["username"]);
+                $("#email_pwd").val(data["email"]["password"]);
+                $("#email_rcv").val(data["email"]["receiver"]);
+                $("#city_location").val(data["weather"]["location"]);
+                $("#city_name").val(data["weather"]["city_name"]);
+                $("#app_key").val(data["weather"]["app_key"]);
+                $("#server").val(data["ntp_server"]);
+                $("#update_period").val(parseInt(data["weather"]["update_period"]) / 60);
+                var mode = data["alarm"]["mode"];
+                if (mode == "repeat") {
+                    $("#date_row").hide();
+                    //$("#repeat").prop("checked", "checked");
+                    //$("#repeat1").removeAttr("checked");
+                } else {
+                    $("#date_row").show();
+                    //$("#repeat").removeAttr("checked");
+                    //$("#repeat1").prop("checked", "checked");
+                }
+                //$("#status").prop("checked", data["alarm"]["status"]);
+                //$("#temp_alarm").prop("checked", data["dht_sensor"]["temp_alarm"]);
+                //$("#huim_alarm").prop("checked", data["dht_sensor"]["huim_alarm"]);
+                $("#status").bootstrapSwitch('state', data["alarm"]["status"]);
+                $("#temp_alarm").bootstrapSwitch('state',data["dht_sensor"]["temp_alarm"]);
+                $("#huim_alarm").bootstrapSwitch('state',data["dht_sensor"]["huim_alarm"]);
+                $("#temp").val(data["dht_sensor"]["temp"]);
+                $("#temp_exp").val(data["dht_sensor"]["temp_exp"]);
+                $("#temp_alarm_action").val(data["dht_sensor"]["temp_alarm_action"]);
+                $("#huim").val(data["dht_sensor"]["huim"]);
+                $("#huim_exp").val(data["dht_sensor"]["huim_exp"]);
+                $("#huim_alarm_action").val(data["dht_sensor"]["huim_alarm_action"]);
+                $("#date").val(data["alarm"]["date"]);
+                $("#time").val(data["alarm"]["time"]);
+                $("#tips").val(data["tips"]);
+                var id = "#to-do-list-";
+                for(var i=1;i<=10;i++)
+                {
+                    $(id+i).val(data["to_do_list"][i-1]);   
+                }
+                $("#brightness").data('slider').setValue(data["brightness"]);
+                $("#voice-slider").data('slider').setValue(data["voice"]["time"]);
+                $("#voice_status").bootstrapSwitch('state', data["voice"]["status"]);
+                $("#default_page").val(data["default_page"]);
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $("#voice-slider").slider({
+         min: 0, max: 23, value: [7, 21],tooltip: 'always',
+        formatter: function (value) {
+            return '播报时段: ' + value[0] + '点-' + value[1] + "点";
+        }});
+    $('#brightness').slider({
+        tooltip: 'always',
+        formatter: function (value) {
+            return '亮度: ' + value;
+        }
+    });
+    $("#set_voice").click(function(){
+        $.ajax({
+            type: 'POST',
+            url: "/set_voice",
+            data: "{}",
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    //layer.msg("参数保存成功")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#brightness').on("slideStop", function (event) {
+        //console.log("亮度:" + event.value);
+        console.log("亮度:" + $("#brightness").data('slider').getValue());
+        var brightness = {
+            'brightness': parseInt(event.value),
+        };
+        $.ajax({
+            type: 'POST',
+            url: "/set_brightness",
+            data: JSON.stringify(brightness),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    //layer.msg("参数保存成功")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    })
+    $("#rtc_time").datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss',
+        locale: moment.locale('zh-CN'),
+    });
+    $("#set_rtc_time").click(function(){
+        var date_time = $("#rtc_time").val();
+        var dat = new Date(date_time);
+        //console.log(date.toDateString().substring(date.toDateString().indexOf(" ")+1));
+        var date = dat.toDateString().substring(dat.toDateString().indexOf(" ")+1);
+        var time = date_time.substring(11);
+        //console.log(time);
+        //转换成ISO标准格式，方便调整时间
+        var date_time = {
+            'date': date,
+            'time': time,
+        };
+        $.ajax({
+            type: 'POST',
+            url: "/set_rtc",
+            data: JSON.stringify(date_time),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("RTC修改成功！");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    // $('#brightness').on("change", function (event) {
+    //     console.log("value:" + event.value.oldValue);
+    // })
+    $('#set_tips').click(function () {
+        var tips = {
+            'tips': $("#tips").val(),
+        };
+        $.ajax({
+            type: 'POST',
+            url: "/set_tips",
+            data: JSON.stringify(tips),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("成功！")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_to_do_list').click(function () {
+        var array = new Array();
+        var id = "#to-do-list-";
+        for(var i=1;i<=10;i++)
+        {
+            array[i-1]=$(id+i).val();   
+        }
+        var to_do_list = {
+            'to_do_list': array,
+        };
+        console.log(to_do_list);
+        $.ajax({
+            type: 'POST',
+            url: "/set_to_do_list",
+            data: JSON.stringify(to_do_list),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("成功！")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_alarm').click(function () {
+        var mode = "repeat";
+        if ($("#repeat").prop("checked") == true) {
+            mode = "repeat";
+        } else {
+            mode = "once";
+        }
+        var status = $("#status").prop("checked");
+        var alarm = {
+            'mode': mode,
+            'status': status,
+            'date': $("#date").val(),
+            'time': $("#time").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: "/set_alarm",
+            data: JSON.stringify(alarm),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功!");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_temp_alarm').click(function () {
+        var temp_alarm = {
+                "temp_exp":$("#temp_exp").val(),
+                "temp":parseInt($("#temp").val()),
+                "temp_alarm":$("#temp_alarm").val()=="true"?true:false,
+                "temp_alarm_action":$("#temp_alarm_action").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/set_temp_alarm",
+            data: JSON.stringify(temp_alarm),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功!");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_huim_alarm').click(function () {
+        var huim_alarm = {
+                "huim_exp":$("#huim_exp").val(),
+                "huim":parseInt($("#huim").val()),
+                "huim_alarm": $("#huim_alarm").val()=="true"?true:false,
+                "huim_alarm_action":$("#huim_alarm_action").val()
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/set_huim_alarm",
+            data: JSON.stringify(huim_alarm),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功!");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_email').click(function () {
+        var email_cfg = {
+                "host":$("#email_host").val(),
+                "port":parseInt($("#email_port").val()),
+                "username":$("#email_user").val(),
+                "password":$("#email_pwd").val(),
+                "receiver":$("#email_rcv").val()
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/set_email",
+            data: JSON.stringify(email_cfg),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功!");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $("#time").datetimepicker({
+                format: 'HH:mm:ss',
+                locale: moment.locale('zh-CN')
+            });
+    function radio_click() {
+        if ($("#repeat").prop("checked") == true) {
+            //format = 'HH:mm:ss';
+            $("#date_row").hide();
+        } else {
+            //format = 'YYYY-MM-DD HH:mm:ss';
+            $("#date_row").show();
+            $("#date").datetimepicker({
+                format: 'YYYY-MM-DD',
+                locale: moment.locale('zh-CN'),
+            });
+            $("#time").datetimepicker({
+                format: 'HH:mm:ss',
+                locale: moment.locale('zh-CN')
+            });
+        }
+    }
+
+    $('#restart').click(function () {
+        $.ajax({
+            type: 'POST',
+            url: "/restart",
+            data: "",
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+
+    function strlen(str) {
+        var len = 0;
+        for (var i = 0; i < str.length; i++) {
+            var c = str.charCodeAt(i);
+            //单字节加1
+            if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+                len++;
+            } else {
+                len += 2;
+            }
+        }
+        return len;
+    }
+ 
+
+    $("#check").click(function () {
+        var location = $("#city_location").val();
+        var app_key = $("#app_key").val();
+        //console.log(location);
+        console.log(app_key);
+        var url = "https://search.heweather.net/find?" + "key=" + app_key + "&location=" + location;
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            success: function (data) {
+                if (data["HeWeather6"][0]["status"] == "ok") {
+                    var name = data["HeWeather6"][
+                            0
+                        ][
+                            "basic"
+                        ][0][
+                            "admin_area"
+                        ] +
+                        " " + data["HeWeather6"][0]["basic"][0]["parent_city"] +
+                        " " + data["HeWeather6"][0]["basic"][0]["location"];
+                    $("#city_name").val(name);
+                } else {
+                    layer.alert(data["HeWeather6"][0]["status"]);
+
+                }
+            },
+            error: function (data) {
+                layer.alert("请求失败!");
+            },
+        });
+    });
+    $('#confirm').click(function () {
+        var ssid = $("#ssid").val();
+        var password = $("#password").val();
+        var city_location = $("#city_location").val();
+        var city_name = $("#city_name").val();
+        var app_key = $("#app_key").val();
+        var ntp_server = $("#server").val();
+        var tips = $("#tips").val();
+        var brightness = $("#brightness").data('slider').getValue();
+        var voice_time = $("#voice-slider").data('slider').getValue();
+        var update_period = parseInt($("#update_period").val()) * 60;
+        if (strlen(city_name) > 16) {
+            layer.msg("坐标名称长度过长<br>不能超过8个中文或16个英文字符！")
+            return;
+        }
+        if (strlen(tips) > 40) {
+            layer.msg("备忘录内容过长,<br>不能超过20个中文或40个英文字符！")
+            return;
+        }
+        var mode = "repeat";
+        if ($("#repeat").prop("checked") == true) {
+            mode = "repeat";
+        } else {
+            mode = "once";
+        }
+        var status = $("#status").prop("checked");
+        var date = $("#date").val();
+        var time = $("#time").val();
+        var array = new Array();
+        var id = "#to-do-list-";
+        for(var i=1;i<=10;i++)
+        {
+            array[i-1]=$(id+i).val();   
+        }
+        
+        var config = {
+            "weather": {
+                "location": city_location,
+                "app_key": app_key,
+                "update_period": update_period,
+                "city_name": city_name
+            },
+            "wifi": {
+                "ssid": ssid,
+                "password": password
+            },
+            "alarm": {
+                "status": status,
+                "mode": mode,
+                "date": date,
+                "time": time,
+            },
+            "email":{
+                "host":$("#email_host").val(),
+                "port":parseInt($("#email_port").val()),
+                "username":$("#email_user").val(),
+                "password":$("#email_pwd").val(),
+                "receiver":$("#email_rcv").val()
+            },
+            "dht_sensor":{
+                "temp_exp":$("#temp_exp").val(),
+                "temp":parseInt($("#temp").val()),
+                "temp_alarm":$("#temp_alarm").val()=="true"?true:false,
+                "temp_alarm_action":$("#temp_alarm_action").val(),
+                "huim_exp":$("#huim_exp").val(),
+                "huim":parseInt($("#huim").val()),
+                "huim_alarm": $("#huim_alarm").val()=="true"?true:false,
+                "huim_alarm_action":$("#huim_alarm_action").val()
+            },
+            "to_do_list":array,
+            "default_page": $("#default_page").val(),
+            "tips": tips,
+            "brightness": brightness,
+            "voice":{
+                "time":voice_time,
+                "status":$("#voice_status").prop("checked")
+            },
+
+
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/set_config",
+            data: JSON.stringify(config),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("参数保存成功,重启后生效！")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+</script>
+</body>
+
+</html>]]></content>
+      <categories>
+        <category>ESP32桌面气象站-LCD触控版</category>
+      </categories>
+      <tags>
+        <tag>ESP32</tag>
+        <tag>firmware</tag>
+      </tags>
+  </entry>
+</search>

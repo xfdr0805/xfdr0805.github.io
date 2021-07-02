@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>桌面气象站使用手册 | 产品使用手册</title><meta name="keywords" content="ESP32"><meta name="author" content="xfdr0805"><meta name="copyright" content="xfdr0805"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="设备上电 1设备使用5V供电，使用 Micro USB 或Type C 接口的连接线 设备配网 设备在上电时在30秒内未连接到网络上，会自动进入AP模式，会显示两个按钮，一个热点配网，一个是二维码配网，可自由选择配网方式。  热点配网  用手机或者电脑 连接一个叫ESP-Weather-Station的热点，密码是12345678 连接上后 在浏览器地址栏里输入192.168.4.1 会打开一个配">
+<meta property="og:type" content="article">
+<meta property="og:title" content="桌面气象站使用手册">
+<meta property="og:url" content="http://xfdr0805.gitee.io/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/index.html">
+<meta property="og:site_name" content="产品使用手册">
+<meta property="og:description" content="设备上电 1设备使用5V供电，使用 Micro USB 或Type C 接口的连接线 设备配网 设备在上电时在30秒内未连接到网络上，会自动进入AP模式，会显示两个按钮，一个热点配网，一个是二维码配网，可自由选择配网方式。  热点配网  用手机或者电脑 连接一个叫ESP-Weather-Station的热点，密码是12345678 连接上后 在浏览器地址栏里输入192.168.4.1 会打开一个配">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2020-12-22T08:17:07.000Z">
+<meta property="article:modified_time" content="2021-07-02T01:02:21.372Z">
+<meta property="article:author" content="xfdr0805">
+<meta property="article:tag" content="ESP32">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://xfdr0805.gitee.io/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '桌面气象站使用手册',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-02 09:02:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">产品使用手册</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">桌面气象站使用手册</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-22T08:17:07.000Z" title="发表于 2020-12-22 16:17:07">2020-12-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-02T01:02:21.372Z" title="更新于 2021-07-02 09:02:21">2021-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ESP32%E6%A1%8C%E9%9D%A2%E6%B0%94%E8%B1%A1%E7%AB%99-LCD%E8%A7%A6%E6%8E%A7%E7%89%88/">ESP32桌面气象站-LCD触控版</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="桌面气象站使用手册"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="设备上电"><a href="#设备上电" class="headerlink" title="设备上电"></a>设备上电</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设备使用5V供电，使用 Micro USB 或Type C 接口的连接线</span><br></pre></td></tr></table></figure>
+<h2 id="设备配网"><a href="#设备配网" class="headerlink" title="设备配网"></a>设备配网</h2><hr>
+<p>设备在上电时在30秒内未连接到网络上，<del>会自动进入AP模式</del>，会显示两个按钮，一个热点配网，一个是二维码配网，可自由选择配网方式。</p>
+<ul>
+<li><p>热点配网</p>
+<blockquote>
+<p>用手机或者电脑 连接一个叫<code>ESP-Weather-Station</code>的热点，密码是<code>12345678</code> 连接上后 在浏览器地址栏里输入<code>192.168.4.1</code> 会打开一个配网页面 如下图所示 </p>
+</blockquote>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image7.png" class="" title="配网">
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image5.png" class="" title="配网"></li>
+<li><p>扫码配网</p>
+<blockquote>
+<p>打开微信扫一扫，扫描屏幕显示的二维码，按照提示输入wifi密码进行配网，设备接收到密码后会自动重启 使用新的WiFi名称和密码连接网络</p>
+</blockquote>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image6.png" class="" title="配网"></li>
+<li><p>APP配网</p>
+<blockquote>
+<p>安装官方ESPTOUCH 配网工具进行配网 <a target="_blank" rel="noopener" href="https://www.espressif.com/zh-hans/products/software/esp-touch/resources">乐鑫官方连接</a></p>
+</blockquote>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/esptouch.png" class="" title="配网">
+
+</li>
+</ul>
+<p>可以点击扫描网络，选择一个网络输入密码，点击提交后，机器会重启，然后开始连接网络</p>
+<h2 id="天气key申请"><a href="#天气key申请" class="headerlink" title="天气key申请"></a>天气key申请</h2><hr>
+<p>到<a target="_blank" rel="noopener" href="https://id.qweather.com/#/register?redirect=https%3A%2F%2Fconsole.qweather.com">和风天气官网</a>申请帐号，注册成功后，登录进后台，点击<code>和风天气开发者控制台</code>进入</p>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image1.png" class="">
+
+<p>在左侧找到 <code>应用管理</code> 点击右侧<code>创建应用</code> 名称随意填，选择<code>免费开发版</code> 😊 点击保存后，会得到下图所示的KEY</p>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image2.png" class="" title="KEY">
+<p>将这个KEY保存下来，后边获取设置天气参数需要用到</p>
+<p>目前申请的key 根据大家反应，得需要实名谁才能正常获取天气，请大家注意</p>
+<h2 id="设备参数设置"><a href="#设备参数设置" class="headerlink" title="设备参数设置"></a>设备参数设置</h2><hr>
+<p>在浏览器里输入<a target="_blank" rel="noopener" href="http://weather.local/">http://weather.local</a> 注意要完整输入 不是https  用户名和密码都是admin  会打开如下 所示的页面</p>
+<img src="/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/image3.png" class="" title="主页">
+
+<p>这里的参数根据需要进行填写即可</p>
+<h3 id="闹钟使用说明"><a href="#闹钟使用说明" class="headerlink" title="闹钟使用说明"></a>闹钟使用说明</h3><hr>
+<ul>
+<li>闹钟支持单次和重复功能<ol>
+<li>单次指支指定时间只响一次，一次响5分钟，在闹钟响时可以点击一次触摸屏停止报警</li>
+<li>重复指每天到达指定时间都会响起，要关闭报警可以触摸一次屏幕关闭，如果不关闭，5分钟后自动关闭</li>
+</ol>
+</li>
+</ul>
+<h3 id="天气功能使用说明"><a href="#天气功能使用说明" class="headerlink" title="天气功能使用说明"></a>天气功能使用说明</h3><hr>
+<p>将前边获取到的KEY填进APP key 里，然后可以点击验证看是否正确，如果能返回经纬度坐标，说明网络没有问题，下边的坐标名称可以修改成你想显示的内容，这个坐标名称就是显示在气象站屏幕右上角的内容，更新频率可以自由修改</p>
+<h3 id="温湿度报警说明"><a href="#温湿度报警说明" class="headerlink" title="温湿度报警说明"></a>温湿度报警说明</h3><hr>
+<ul>
+<li>温度报警选择蜂鸣器报警，在达到指定条件时，会触发蜂鸣器间隔0.35S声音，此时点击屏幕可以关掉，如果不关，在5分钟后自动关闭</li>
+<li>温度报警选择语音播报，在达到指定条件时，会触发一次语音报时，从喇叭里发出，播放完毕即结束</li>
+<li>温度报警选择邮件通知时，在达到指定条件时，会自动发出一封邮件到指定邮箱，如果想在微信里收到，可以使用qq邮箱，其它的邮箱请使用客户端进行收取</li>
+</ul>
+<h3 id="常用邮箱参数"><a href="#常用邮箱参数" class="headerlink" title="常用邮箱参数"></a>常用邮箱参数</h3><td class="d-block comment-body markdown-body  js-comment-body">
+          <p>网易系邮件配置如下：<br>
+<a rel="nofollow noopener" target="_blank" href="http://help.163.com/10/0731/11/6CTUBPT300753VB8.html">http://help.163.com/10/0731/11/6CTUBPT300753VB8.html</a></p>
+<blockquote>
+<p>163邮箱的收取邮件支持POP/IMAP两种协议，发送邮件采用SMTP协议<br>
+收件和发件均使用SSL协议来进行加密传输，采用SSL协议需要单独对帐户进行设置<br>
+采用SSL协议和非SSL协议时端口号有所区别，参照下表的一些常见配置组合:</p>
+</blockquote>
+<table>
+    <thead>
+        <tr>
+            <th>类型</th>
+            <th>服务器名称</th>
+            <th>服务器地址</th>
+            <th>SSL协议端口号</th>
+            <th>非SSL协议端口号</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>收件服务器</td>
+        <td>POP</td>
+        <td>pop.163.com</td>
+        <td>995</td>
+        <td>110</td>
+    </tr>
+    <tr>
+        <td>收件服务器</td>
+        <td>IMAP</td>
+        <td>imap.163.com</td>
+        <td>993</td>
+        <td>143</td>
+    </tr>
+    <tr>
+        <td>发件服务器</td>
+        <td>SMTP</td>
+        <td>smtp.163.com</td>
+        <td>465/994</td>
+        <td>25</td>
+    </tr>
+    </tbody>
+</table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">xfdr0805</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://xfdr0805.gitee.io/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/">http://xfdr0805.gitee.io/2020/12/22/ESP32/%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://xfdr0805.gitee.io" target="_blank">产品使用手册</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ESP32/">ESP32</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/12/26/ESP32/webpage/"><img class="prev-cover" src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">web配置界面在线体验</div></div></a></div><div class="next-post pull-right"><a href="/2020/12/22/ESP32/%E6%9B%B4%E6%96%B0%E7%A8%8B%E5%BA%8F/"><img class="next-cover" src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">程序更新步骤</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/01/25/ESP32/FAQ/" title="FAQ-常见问题列表"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-25</div><div class="title">FAQ-常见问题列表</div></div></a></div><div><a href="/2020/12/26/ESP32/update/" title="固件更新记录---持续更新"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-26</div><div class="title">固件更新记录---持续更新</div></div></a></div><div><a href="/2020/12/22/ESP32/更新程序/" title="程序更新步骤"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-22</div><div class="title">程序更新步骤</div></div></a></div><div><a href="/2020/12/22/ESP32/设备界面/" title="设备界面预览"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-22</div><div class="title">设备界面预览</div></div></a></div><div><a href="/2020/12/22/ESP32/功能说明/" title="支持的功能列表"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-22</div><div class="title">支持的功能列表</div></div></a></div><div><a href="/2021/01/26/ESP32-Epaper/index/" title="墨水屏气象站"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-26</div><div class="title">墨水屏气象站</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">xfdr0805</div><div class="author-info__description">esp32桌面气象站</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E4%B8%8A%E7%94%B5"><span class="toc-number">1.</span> <span class="toc-text">设备上电</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%91"><span class="toc-number">2.</span> <span class="toc-text">设备配网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A9%E6%B0%94key%E7%94%B3%E8%AF%B7"><span class="toc-number">3.</span> <span class="toc-text">天气key申请</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">设备参数设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%B9%E9%92%9F%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-number">4.1.</span> <span class="toc-text">闹钟使用说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A9%E6%B0%94%E5%8A%9F%E8%83%BD%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-number">4.2.</span> <span class="toc-text">天气功能使用说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%A9%E6%B9%BF%E5%BA%A6%E6%8A%A5%E8%AD%A6%E8%AF%B4%E6%98%8E"><span class="toc-number">4.3.</span> <span class="toc-text">温湿度报警说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E9%82%AE%E7%AE%B1%E5%8F%82%E6%95%B0"><span class="toc-number">4.4.</span> <span class="toc-text">常用邮箱参数</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2021/01/26/ESP32-Epaper/index/" title="墨水屏气象站">墨水屏气象站</a><time datetime="2021-01-26T06:59:10.000Z" title="发表于 2021-01-26 14:59:10">2021-01-26</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2021/01/25/ESP32/FAQ/" title="FAQ-常见问题列表">FAQ-常见问题列表</a><time datetime="2021-01-25T13:20:07.000Z" title="发表于 2021-01-25 21:20:07">2021-01-25</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2020/12/29/HomeKit/sonoff-1ch/" title="Sonoff-1CH">Sonoff-1CH</a><time datetime="2020-12-29T08:00:53.000Z" title="发表于 2020-12-29 16:00:53">2020-12-29</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2020/12/28/HomeKit/sonoff-2ch/" title="Sonoff-2CH">Sonoff-2CH</a><time datetime="2020-12-28T08:00:53.000Z" title="发表于 2020-12-28 16:00:53">2020-12-28</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2020/12/26/HomeKit/sonoff-4ch/" title="Sonoff-4CH">Sonoff-4CH</a><time datetime="2020-12-26T08:00:53.000Z" title="发表于 2020-12-26 16:00:53">2020-12-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By xfdr0805</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
