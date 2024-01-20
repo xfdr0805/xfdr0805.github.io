@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Neza-D1开发板学习之I2C-OLED篇 | xfdr0805·点滴记忆</title><meta name="author" content="xfdr0805"><meta name="copyright" content="xfdr0805"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Neza-D1开发板扩展IO上引出了I2C2，从原理图上看，已经接了PCF8574@38了，总线速度400K,我们的OLED也是接在这上边的,由于这屏幕比较小，显示不了多少东西，就不用FB方式了，直接在应用层操作OLED，所以设备树也不需要配置   在应用层操作就跟单片机操作是一样的了，这里为了方"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://xfdr0805.gitee.io/pages/510b/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Neza-D1开发板学习之I2C-OLED篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-02-19 10:44:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='null'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xfdr0805·点滴记忆"><span class="site-name">xfdr0805·点滴记忆</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Neza-D1开发板学习之I2C-OLED篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-09T02:54:21.000Z" title="发表于 2021-09-09 10:54:21">2021-09-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-19T02:44:52.558Z" title="更新于 2023-02-19 10:44:52">2023-02-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">698</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Neza-D1开发板学习之I2C-OLED篇"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><ol>
+<li><p>Neza-D1开发板扩展IO上引出了I2C2，从原理图上看，已经接了PCF8574@38了，总线速度400K,我们的OLED也是接在这上边的,由于这屏幕比较小，显示不了多少东西，就不用FB方式了，直接在应用层操作OLED，所以设备树也不需要配置</p>
+ </li>
+<li><p>在应用层操作就跟单片机操作是一样的了，这里为了方便操作屏幕，我分辨率移植u8g2这个库，我手里的哦了的是1.3”的，驱动IC是SHT1106，用1306也可以，只能显示不满屏，可能是基地址定义的不一样</p>
+</li>
+<li><p>我们不需要从OLED读取数据，所以只需要实现I2C写函数就可以，注意OLED模块上标的地址是0x78，这个是8位地址，这里使用的是7位地址，右移一位所以是0x3C</p>
+<pre><code> unsigned char i2c_init()
+ &#123;
+     const char *i2c_dev = &quot;/dev/i2c-2&quot;;
+     fd = open(i2c_dev, O_RDWR);
+     if (fd &lt; 0)
+     &#123;
+         printf(&quot;not have /dev/i2c-2 t\r\n&quot;);
+         fflush(stdout);
+         return -1;
+     &#125;
+     return 0;
+ &#125;
+ // I2C Addr 7bit
+ unsigned char base_i2c_write(unsigned char device_addr, unsigned char *buff, int num)
+ &#123;
+
+     struct i2c_rdwr_ioctl_data data;
+     struct i2c_msg msgs_str[1];
+     data.msgs = msgs_str;
+     data.nmsgs = 1;
+     data.msgs[0].len = num;
+     data.msgs[0].addr = device_addr;
+     data.msgs[0].flags = 0;
+     data.msgs[0].buf = buff;
+     ioctl(fd, I2C_RDWR, (unsigned long)&amp;data);
+ &#125;
+</code></pre>
+</li>
+<li><p>移植u8g2 非常简单，只需修改这下边这个函数里初始化位置和写数据位置就行，另外一个是延时，可以不用修改<br> uint8_t u8x8_byte_hw_i2c(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void <em>arg_ptr)<br> {<br>     &#x2F;</em> u8g2&#x2F;u8x8 will never send more than 32 bytes between START_TRANSFER and END_TRANSFER *&#x2F;<br>     static uint8_t buffer[128];<br>     static uint8_t buf_idx;<br>     uint8_t <em>data;<br><br>     switch (msg)<br>     {<br>     case U8X8_MSG_BYTE_INIT:<br>     {<br>         &#x2F;</em> add your custom code to init i2c subsystem *&#x2F;<br>        i2c_init; &#x2F;&#x2F; I2C初始化<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_START_TRANSFER:<br>     {<br>         buf_idx &#x3D; 0;<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_SEND:<br>     {<br>         data &#x3D; (uint8_t *)arg_ptr;<br><br>         while (arg_int &gt; 0)<br>         {<br>             buffer[buf_idx++] &#x3D; *data;<br>             data++;<br>             arg_int–;<br>         }<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_END_TRANSFER:<br>     {<br>         &#x2F;&#x2F;i2c写函数<br>         if (base_i2c_write(OLED_ADDRESS, buffer, buf_idx) !&#x3D; 0)<br>             return 0;<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_SET_DC:<br>         break;<br><br>     default:<br>         return 0;<br>     }<br><br>     return 1;<br> }<br><br> uint8_t u8x8_gpio_and_delay(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void <em>arg_ptr)<br> {<br>     switch (msg)<br>     {<br>     case U8X8_MSG_DELAY_100NANO: &#x2F;&#x2F; delay arg_int * 100 nano seconds<br>         break;<br>     case U8X8_MSG_DELAY_10MICRO: &#x2F;&#x2F; delay arg_int * 10 micro seconds<br>         break;<br>     case U8X8_MSG_DELAY_MILLI: &#x2F;&#x2F; delay arg_int * 1 milli second<br>         break;<br>     case U8X8_MSG_DELAY_I2C:      &#x2F;&#x2F; arg_int is the I2C speed in 100KHz, e.g. 4 &#x3D; 400 KHz<br>         break;                    &#x2F;&#x2F; arg_int&#x3D;1: delay by 5us, arg_int &#x3D; 4: delay by 1.25us<br>     case U8X8_MSG_GPIO_I2C_CLOCK: &#x2F;&#x2F; arg_int&#x3D;0: Output low at I2C clock pin<br>         break;                    &#x2F;&#x2F; arg_int&#x3D;1: Input dir with pullup high for I2C clock pin<br>     case U8X8_MSG_GPIO_I2C_DATA:  &#x2F;&#x2F; arg_int&#x3D;0: Output low at I2C data pin<br>         break;                    &#x2F;&#x2F; arg_int&#x3D;1: Input dir with pullup high for I2C data pin<br>     case U8X8_MSG_GPIO_MENU_SELECT:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu select pin state <em>&#x2F; 0);<br>         break;<br>     case U8X8_MSG_GPIO_MENU_NEXT:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu next pin state <em>&#x2F; 0);<br>         break;<br>     case U8X8_MSG_GPIO_MENU_PREV:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu prev pin state <em>&#x2F; 0);<br>         break;<br>     case U8X8_MSG_GPIO_MENU_HOME:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu home pin state *&#x2F; 0);<br>         break;<br>     default:<br>         u8x8_SetGPIOResult(u8x8, 1); &#x2F;&#x2F; default return value<br>         break;<br>     }<br>     return 1;<br> }</p>
+</li>
+<li><p>这就移植完了，下边编译一下传到开发板里，可以看到显示成功</p>
+</li>
+<li><p>最后附上完整工程</p>
+</li>
+</ol>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/D1/">D1</a><a class="post-meta__tags" href="/tags/Neza/">Neza</a><a class="post-meta__tags" href="/tags/I2C/">I2C</a><a class="post-meta__tags" href="/tags/OLED/">OLED</a></div><div class="post_share"></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/null'" alt="avatar"/></div><div class="author-info__name">xfdr0805</div><div class="author-info__description">记录</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://xfdr0805.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">天天向上，点点滴滴</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/8d40/" title="STM32F1上使用CherryUSB框架做HID通信">STM32F1上使用CherryUSB框架做HID通信</a><time datetime="2023-12-22T05:23:21.000Z" title="发表于 2023-12-22 13:23:21">2023-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/bb4b/" title="Windows上位机使用HidSharp进行HID通信">Windows上位机使用HidSharp进行HID通信</a><time datetime="2023-12-22T01:44:50.000Z" title="发表于 2023-12-22 09:44:50">2023-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/50c/" title="Windows上位机使用NPOI生成excel文档">Windows上位机使用NPOI生成excel文档</a><time datetime="2023-12-22T01:36:11.000Z" title="发表于 2023-12-22 09:36:11">2023-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/51ce/" title="Windows上位机使用iTextSharp生成pdf文档">Windows上位机使用iTextSharp生成pdf文档</a><time datetime="2023-12-22T01:19:32.000Z" title="发表于 2023-12-22 09:19:32">2023-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/c622/" title="全志F1C上RTT音频驱动调试">全志F1C上RTT音频驱动调试</a><time datetime="2023-08-25T05:58:43.000Z" title="发表于 2023-08-25 13:58:43">2023-08-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By xfdr0805</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addModeChange('mermaid', runMermaid)
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'sEvINwaKzuTq1RkvCDLow0q3-gzGzoHsz',
+      appKey: 'WUUWPWLohtQY1iG9euBjob62',
+      avatar: 'monsterid',
+      serverURLs: 'https://sevinwak.lc-cn-n1-shared.com',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Neza-D1开发板学习之按键和旋转编码器篇 | xfdr0805·点滴记忆</title><meta name="author" content="xfdr0805"><meta name="copyright" content="xfdr0805"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Neza-D1开发板上只引出一个按键，是使用的LRADC检检测按键的，想使用更多按键，可以使用板子上通过PCF8574扩展出来的IO，我画的扩展板使用了四个按键，分别为PP0，PP1，PP2，PP4   设备树配置如下 内核需要勾选 Polled input device skeleton gpi"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://xfdr0805.gitee.io/pages/55f5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Neza-D1开发板学习之按键和旋转编码器篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-02-19 10:44:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='null'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="xfdr0805·点滴记忆"><span class="site-name">xfdr0805·点滴记忆</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Neza-D1开发板学习之按键和旋转编码器篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-09T02:07:00.000Z" title="发表于 2021-09-09 10:07:00">2021-09-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-19T02:44:52.558Z" title="更新于 2023-02-19 10:44:52">2023-02-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">790</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Neza-D1开发板学习之按键和旋转编码器篇"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><ol>
+<li><p>Neza-D1开发板上只引出一个按键，是使用的LRADC检检测按键的，想使用更多按键，可以使用板子上通过PCF8574扩展出来的IO，我画的扩展板使用了四个按键，分别为PP0，PP1，PP2，PP4</p>
+ <img src="/pages/55f5/KEY.png" class="" title="KEY"></li>
+<li><p>设备树配置如下 内核需要勾选 Polled input device skeleton<br> gpio_keys {<br>     compatible &#x3D; “gpio-keys”;<br>     pinctrl-names &#x3D; “default”;<br>     &#x2F;<em>pinctrl-0 &#x3D; &lt;&amp;key_pins&gt;;</em>&#x2F;<br>     #address-cells &#x3D; &lt;1&gt;;<br>     #size-cells &#x3D; &lt;0&gt;;<br>     autorepeat;<br>     button@0 {<br>         label &#x3D; “Key volume up”;<br>         linux,code &#x3D; <KEY_VOLUMEUP>;<br>         gpios &#x3D; &lt;&amp;pcf8574 0 GPIO_ACTIVE_LOW&gt;; &#x2F;* PP0 <em>&#x2F;<br>     };<br><br>     button@1 {<br>         label &#x3D; “Key volume down”;<br>         linux,code &#x3D; <KEY_VOLUMEDOWN>;<br>         gpios &#x3D; &lt;&amp;pcf8574 1 GPIO_ACTIVE_LOW&gt;; &#x2F;</em> PP1 <em>&#x2F;<br>     };<br><br>     button@2 {<br>         label &#x3D; “Key back”;<br>         linux,code &#x3D; <KEY_BACK>;<br>         gpios &#x3D; &lt;&amp;pcf8574 2 GPIO_ACTIVE_LOW&gt;; &#x2F;</em> PP2 <em>&#x2F;<br>     };<br><br>     button@3 {<br>         label &#x3D; “Key enter”;<br>         linux,code &#x3D; <KEY_ENTER>;<br>         gpios &#x3D; &lt;&amp;pcf8574 4 GPIO_ACTIVE_LOW&gt;; &#x2F;</em> PP4 *&#x2F;<br>     };<br><br> };</p>
+</li>
+<li><p>编码器接在D1的PD14 PD15 设备树如下 注意需要内核勾选&lt;<em>&gt;   Polled GPIO Decoder Input driver<br> rotary {<br>     compatible &#x3D; “rotary-encoder”;<br>     pinctrl-names &#x3D; “default”;<br>     &#x2F;<em>pinctrl-0 &#x3D; &lt;&amp;rotary_pins&gt;;</em>&#x2F;<br>     gpios &#x3D; &lt;&amp;pio 3 14 GPIO_ACTIVE_LOW&gt;, &lt;&amp;pio 3 15 GPIO_ACTIVE_LOW&gt;; &#x2F;</em> PD14, PD15 <em>&#x2F;<br>     linux,axis &#x3D; &lt;0&gt;; &#x2F;</em> REL_X *&#x2F;<br>     rotary-encoder,encoding &#x3D; “gray”;<br>     rotary-encoder,relative-axis;<br> };<br> 然后在内核勾选</p>
+</li>
+<li><p>系统启动会有如下log</p>
+<pre><code> [    0.111735] input: sunxi-keyboard as /devices/virtual/input/input0  这是板载的那个LRADC 按键
+ [    1.668976] rotary-encoder soc@3000000:rotary: gray 这是旋转编码器
+ [    1.675145] input: soc@3000000:rotary as /devices/platform/soc@3000000/soc@3000000:rotary/input/input1
+ [    3.178668] input: soc@3000000:gpio_keys as /devices/platform/soc@3000000/soc@3000000:gpio_keys/input/input5 这是扩展出来的那4个按键
+ 
+</code></pre>
+</li>
+<li><p>查看系统里已注册的输入设备，用这个比较清楚，ls &#x2F;dev&#x2F;input也可以<br> # evtest<br> No device specified, trying to scan all of &#x2F;dev&#x2F;input&#x2F;event*<br> Available devices:<br> &#x2F;dev&#x2F;input&#x2F;event0:      sunxi-keyboard<br> &#x2F;dev&#x2F;input&#x2F;event1:      soc@3000000:rotary<br> &#x2F;dev&#x2F;input&#x2F;event2:      sunxi-ir<br> &#x2F;dev&#x2F;input&#x2F;event3:      audiocodec sunxi Audio Jack<br> &#x2F;dev&#x2F;input&#x2F;event4:      soc@3000000:gpio_keys<br> &#x2F;dev&#x2F;input&#x2F;event5:      ns2009_ts</p>
+</li>
+<li><p>可以使用evtest或hexdump来测试按键是否正常了</p>
+</li>
+<li><p>在代码使用就比较简单了<br> #include &lt;errno.h&gt;<br> #include &lt;global.h&gt;<br> #include &lt;linux&#x2F;fcntl.h&gt;<br> #include &lt;linux&#x2F;input.h&gt;<br> #include &lt;signal.h&gt;<br> #include &lt;stdio.h&gt; &#x2F;&#x2F;-std&#x3D;c99  -std&#x3D;gnu99<br> #include &lt;stdlib.h&gt;<br> #include &lt;string.h&gt;<br> #include &lt;sys&#x2F;types.h&gt;<br> #include &lt;unistd.h&gt;<br><br> #define msleep(t) usleep((t)*1000)<br> FILE *fp;<br> int32_t fd_key;<br> int32_t fd_encoder;<br> struct input_event t;<br> int main(int argc, char const *argv[])<br> {<br><br>     fd_key &#x3D; open(“&#x2F;dev&#x2F;input&#x2F;event1”, O_RDONLY | O_NONBLOCK);<br>     if (fd_key &lt; 0)<br>     {<br>         fprintf(stderr, “error:can not open &#x2F;dev&#x2F;input&#x2F;event1\n”);<br>         return -1;<br>     }<br>     fd_encoder &#x3D; open(“&#x2F;dev&#x2F;input&#x2F;event4”, O_RDONLY | O_NONBLOCK);<br>     if (fd_encoder &lt; 0)<br>     {<br>         fprintf(stderr, “error:can not open &#x2F;dev&#x2F;input&#x2F;event4\n”);<br>         return -1;<br>     }<br><br>     while (1)<br>     {<br><br>         &#x2F;&#x2F; rotary encoder<br>         if (read(fd_encoder, &amp;t, sizeof(t)) &#x3D;&#x3D; sizeof(t))<br>         {<br><br>             if (t.type &#x3D;&#x3D; EV_REL)<br>             {<br>                 LOG_D(“ROTARY DIR: %d-&gt;%s\n”, t.value, t.value &#x3D;&#x3D; 1 ? “CC” : “CW”);<br>                 rotary_encoder_handler(&amp;u8g2, t.value);<br>             }<br>         }<br>         &#x2F;&#x2F; key<br>         if (read(fd_key, &amp;t, sizeof(t)) &#x3D;&#x3D; sizeof(t))<br>         {<br>             if (t.type &#x3D;&#x3D; EV_KEY)<br>             {<br>                 switch (t.code)<br>                 {<br>                 case KEY_OK:<br>                     LOG_D(“KEY_ENTER %s \n”, t.value ? “Pressed” : “Released”);<br>                     if (t.value &#x3D;&#x3D; 0)<br>                         rotary_encoder_button_handler(&amp;u8g2);<br>                     break;<br>                 case KEY_SELECT:<br>                     LOG_D(“KEY_SELECT %s \n”, t.value ? “Pressed” : “Released”);<br>                     break;<br>                 case KEY_VOLUMEUP:<br>                     LOG_D(“KEY_VOLUMEUP %s \n”, t.value ? “Pressed” : “Released”);<br>                     if (t.value &#x3D;&#x3D; 0)<br>                     {<br>                         rotary_encoder_handler(&amp;u8g2, -1);<br>                     }<br><br>                     break;<br>                 case KEY_VOLUMEDOWN:<br>                     LOG_D(“KEY_VOLUMEDOWN %s \n”, t.value ? “Pressed” : “Released”);<br>                     if (t.value &#x3D;&#x3D; 0)<br>                     {<br>                         rotary_encoder_handler(&amp;u8g2, 1);<br>                     }<br>                     break;<br>                 default:<br>                     break;<br>                 }<br>             }<br>         }<br>         usleep(1);<br>     }<br><br>     return 0;<br> }</p>
+</li>
+</ol>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/D1/">D1</a><a class="post-meta__tags" href="/tags/Neza/">Neza</a><a class="post-meta__tags" href="/tags/KEY/">KEY</a><a class="post-meta__tags" href="/tags/ROTARY-ENCODER/">ROTARY ENCODER</a></div><div class="post_share"></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/null'" alt="avatar"/></div><div class="author-info__name">xfdr0805</div><div class="author-info__description">记录</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://xfdr0805.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">天天向上，点点滴滴</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/8d40/" title="STM32F1上使用CherryUSB框架做HID通信">STM32F1上使用CherryUSB框架做HID通信</a><time datetime="2023-12-22T05:23:21.000Z" title="发表于 2023-12-22 13:23:21">2023-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/bb4b/" title="Windows上位机使用HidSharp进行HID通信">Windows上位机使用HidSharp进行HID通信</a><time datetime="2023-12-22T01:44:50.000Z" title="发表于 2023-12-22 09:44:50">2023-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/50c/" title="Windows上位机使用NPOI生成excel文档">Windows上位机使用NPOI生成excel文档</a><time datetime="2023-12-22T01:36:11.000Z" title="发表于 2023-12-22 09:36:11">2023-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/51ce/" title="Windows上位机使用iTextSharp生成pdf文档">Windows上位机使用iTextSharp生成pdf文档</a><time datetime="2023-12-22T01:19:32.000Z" title="发表于 2023-12-22 09:19:32">2023-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/c622/" title="全志F1C上RTT音频驱动调试">全志F1C上RTT音频驱动调试</a><time datetime="2023-08-25T05:58:43.000Z" title="发表于 2023-08-25 13:58:43">2023-08-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By xfdr0805</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addModeChange('mermaid', runMermaid)
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'sEvINwaKzuTq1RkvCDLow0q3-gzGzoHsz',
+      appKey: 'WUUWPWLohtQY1iG9euBjob62',
+      avatar: 'monsterid',
+      serverURLs: 'https://sevinwak.lc-cn-n1-shared.com',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
