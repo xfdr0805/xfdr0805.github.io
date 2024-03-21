@@ -61,34 +61,6 @@
       </tags>
   </entry>
   <entry>
-    <title>支持的功能列表</title>
-    <url>/pages/67cf/</url>
-    <content><![CDATA[<h3 id="4-0触屏版-支持的功能列表"><a href="#4-0触屏版-支持的功能列表" class="headerlink" title="4.0触屏版 支持的功能列表"></a>4.0触屏版 支持的功能列表</h3><hr>
-<ul>
-<li>支持未来6天及实况天气预报，更新频率参数可以配置</li>
-<li>支持硬件时钟，断电或没网络 走时也准确</li>
-<li>支持GPS对时及速度仪表盘</li>
-<li>支持实时温湿度传感器</li>
-<li>支持模拟时钟，数字时钟</li>
-<li>支持6组闹钟,可以设置单次与重复</li>
-<li>支持cron表达式 (非常强大灵活的定时功能)</li>
-<li>支持温湿度报警 可选蜂鸣器，语音，邮件通知</li>
-<li>支持万年历,倒计时</li>
-<li>支持节日提醒 </li>
-<li>支持十二生肖 天干地支 24节气 时辰</li>
-<li>支持语音报时，可自己修改语音</li>
-<li>支持触摸功能</li>
-<li>配网支持热点配网和扫码配网</li>
-</ul>
-<h3 id="视频展示"><a href="#视频展示" class="headerlink" title="视频展示"></a>视频展示</h3><iframe src="最新实物更新/video.mp4"></iframe>]]></content>
-      <categories>
-        <category>ESP32桌面气象站-LCD触控版</category>
-      </categories>
-      <tags>
-        <tag>ESP32</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>桌面气象站使用手册</title>
     <url>/pages/66cd/</url>
     <content><![CDATA[<h2 id="设备上电"><a href="#设备上电" class="headerlink" title="设备上电"></a>设备上电</h2><hr>
@@ -186,6 +158,34 @@
     </tbody>
 </table>
 ]]></content>
+      <categories>
+        <category>ESP32桌面气象站-LCD触控版</category>
+      </categories>
+      <tags>
+        <tag>ESP32</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>支持的功能列表</title>
+    <url>/pages/67cf/</url>
+    <content><![CDATA[<h3 id="4-0触屏版-支持的功能列表"><a href="#4-0触屏版-支持的功能列表" class="headerlink" title="4.0触屏版 支持的功能列表"></a>4.0触屏版 支持的功能列表</h3><hr>
+<ul>
+<li>支持未来6天及实况天气预报，更新频率参数可以配置</li>
+<li>支持硬件时钟，断电或没网络 走时也准确</li>
+<li>支持GPS对时及速度仪表盘</li>
+<li>支持实时温湿度传感器</li>
+<li>支持模拟时钟，数字时钟</li>
+<li>支持6组闹钟,可以设置单次与重复</li>
+<li>支持cron表达式 (非常强大灵活的定时功能)</li>
+<li>支持温湿度报警 可选蜂鸣器，语音，邮件通知</li>
+<li>支持万年历,倒计时</li>
+<li>支持节日提醒 </li>
+<li>支持十二生肖 天干地支 24节气 时辰</li>
+<li>支持语音报时，可自己修改语音</li>
+<li>支持触摸功能</li>
+<li>配网支持热点配网和扫码配网</li>
+</ul>
+<h3 id="视频展示"><a href="#视频展示" class="headerlink" title="视频展示"></a>视频展示</h3><iframe src="最新实物更新/video.mp4"></iframe>]]></content>
       <categories>
         <category>ESP32桌面气象站-LCD触控版</category>
       </categories>
@@ -308,6 +308,19 @@
       </tags>
   </entry>
   <entry>
+    <title>Sonoff-1CH</title>
+    <url>/pages/756a/</url>
+    <content><![CDATA[<hr>
+<h3 id="待续…"><a href="#待续…" class="headerlink" title="待续…"></a>待续…</h3>]]></content>
+      <categories>
+        <category>homekit</category>
+      </categories>
+      <tags>
+        <tag>sonoff</tag>
+        <tag>1ch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>软件配合实现的一键开关机电路</title>
     <url>/pages/26b6/</url>
     <content><![CDATA[<blockquote>
@@ -374,19 +387,6 @@
       <tags>
         <tag>HardWare</tag>
         <tag>一键开关机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Sonoff-1CH</title>
-    <url>/pages/756a/</url>
-    <content><![CDATA[<hr>
-<h3 id="待续…"><a href="#待续…" class="headerlink" title="待续…"></a>待续…</h3>]]></content>
-      <categories>
-        <category>homekit</category>
-      </categories>
-      <tags>
-        <tag>sonoff</tag>
-        <tag>1ch</tag>
       </tags>
   </entry>
   <entry>
@@ -461,6 +461,62 @@
       </tags>
   </entry>
   <entry>
+    <title>Neza-D1开发板学习之I2C-OLED篇</title>
+    <url>/pages/510b/</url>
+    <content><![CDATA[<ol>
+<li><p>Neza-D1开发板扩展IO上引出了I2C2，从原理图上看，已经接了PCF8574@38了，总线速度400K,我们的OLED也是接在这上边的,由于这屏幕比较小，显示不了多少东西，就不用FB方式了，直接在应用层操作OLED，所以设备树也不需要配置</p>
+ </li>
+<li><p>在应用层操作就跟单片机操作是一样的了，这里为了方便操作屏幕，我分辨率移植u8g2这个库，我手里的哦了的是1.3”的，驱动IC是SHT1106，用1306也可以，只能显示不满屏，可能是基地址定义的不一样</p>
+</li>
+<li><p>我们不需要从OLED读取数据，所以只需要实现I2C写函数就可以，注意OLED模块上标的地址是0x78，这个是8位地址，这里使用的是7位地址，右移一位所以是0x3C</p>
+<pre><code> unsigned char i2c_init()
+ &#123;
+     const char *i2c_dev = &quot;/dev/i2c-2&quot;;
+     fd = open(i2c_dev, O_RDWR);
+     if (fd &lt; 0)
+     &#123;
+         printf(&quot;not have /dev/i2c-2 t\r\n&quot;);
+         fflush(stdout);
+         return -1;
+     &#125;
+     return 0;
+ &#125;
+ // I2C Addr 7bit
+ unsigned char base_i2c_write(unsigned char device_addr, unsigned char *buff, int num)
+ &#123;
+
+     struct i2c_rdwr_ioctl_data data;
+     struct i2c_msg msgs_str[1];
+     data.msgs = msgs_str;
+     data.nmsgs = 1;
+     data.msgs[0].len = num;
+     data.msgs[0].addr = device_addr;
+     data.msgs[0].flags = 0;
+     data.msgs[0].buf = buff;
+     ioctl(fd, I2C_RDWR, (unsigned long)&amp;data);
+ &#125;
+</code></pre>
+</li>
+<li><p>移植u8g2 非常简单，只需修改这下边这个函数里初始化位置和写数据位置就行，另外一个是延时，可以不用修改<br> uint8_t u8x8_byte_hw_i2c(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void <em>arg_ptr)<br> {<br>     &#x2F;</em> u8g2&#x2F;u8x8 will never send more than 32 bytes between START_TRANSFER and END_TRANSFER *&#x2F;<br>     static uint8_t buffer[128];<br>     static uint8_t buf_idx;<br>     uint8_t <em>data;<br><br>     switch (msg)<br>     {<br>     case U8X8_MSG_BYTE_INIT:<br>     {<br>         &#x2F;</em> add your custom code to init i2c subsystem *&#x2F;<br>        i2c_init; &#x2F;&#x2F; I2C初始化<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_START_TRANSFER:<br>     {<br>         buf_idx &#x3D; 0;<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_SEND:<br>     {<br>         data &#x3D; (uint8_t *)arg_ptr;<br><br>         while (arg_int &gt; 0)<br>         {<br>             buffer[buf_idx++] &#x3D; *data;<br>             data++;<br>             arg_int–;<br>         }<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_END_TRANSFER:<br>     {<br>         &#x2F;&#x2F;i2c写函数<br>         if (base_i2c_write(OLED_ADDRESS, buffer, buf_idx) !&#x3D; 0)<br>             return 0;<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_SET_DC:<br>         break;<br><br>     default:<br>         return 0;<br>     }<br><br>     return 1;<br> }<br><br> uint8_t u8x8_gpio_and_delay(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void <em>arg_ptr)<br> {<br>     switch (msg)<br>     {<br>     case U8X8_MSG_DELAY_100NANO: &#x2F;&#x2F; delay arg_int * 100 nano seconds<br>         break;<br>     case U8X8_MSG_DELAY_10MICRO: &#x2F;&#x2F; delay arg_int * 10 micro seconds<br>         break;<br>     case U8X8_MSG_DELAY_MILLI: &#x2F;&#x2F; delay arg_int * 1 milli second<br>         break;<br>     case U8X8_MSG_DELAY_I2C:      &#x2F;&#x2F; arg_int is the I2C speed in 100KHz, e.g. 4 &#x3D; 400 KHz<br>         break;                    &#x2F;&#x2F; arg_int&#x3D;1: delay by 5us, arg_int &#x3D; 4: delay by 1.25us<br>     case U8X8_MSG_GPIO_I2C_CLOCK: &#x2F;&#x2F; arg_int&#x3D;0: Output low at I2C clock pin<br>         break;                    &#x2F;&#x2F; arg_int&#x3D;1: Input dir with pullup high for I2C clock pin<br>     case U8X8_MSG_GPIO_I2C_DATA:  &#x2F;&#x2F; arg_int&#x3D;0: Output low at I2C data pin<br>         break;                    &#x2F;&#x2F; arg_int&#x3D;1: Input dir with pullup high for I2C data pin<br>     case U8X8_MSG_GPIO_MENU_SELECT:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu select pin state <em>&#x2F; 0);<br>         break;<br>     case U8X8_MSG_GPIO_MENU_NEXT:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu next pin state <em>&#x2F; 0);<br>         break;<br>     case U8X8_MSG_GPIO_MENU_PREV:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu prev pin state <em>&#x2F; 0);<br>         break;<br>     case U8X8_MSG_GPIO_MENU_HOME:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu home pin state *&#x2F; 0);<br>         break;<br>     default:<br>         u8x8_SetGPIOResult(u8x8, 1); &#x2F;&#x2F; default return value<br>         break;<br>     }<br>     return 1;<br> }</p>
+</li>
+<li><p>这就移植完了，下边编译一下传到开发板里，可以看到显示成功</p>
+</li>
+<li><p>最后附上完整工程</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>D1</tag>
+        <tag>Neza</tag>
+        <tag>I2C</tag>
+        <tag>OLED</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Naza-D1上使用I2S外接PCM512X声卡</title>
     <url>/pages/dd43/</url>
     <content><![CDATA[<pre><code>    问题
@@ -528,62 +584,6 @@
         <tag>Neza</tag>
         <tag>I2S</tag>
         <tag>PCM512X</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Neza-D1开发板学习之I2C-OLED篇</title>
-    <url>/pages/510b/</url>
-    <content><![CDATA[<ol>
-<li><p>Neza-D1开发板扩展IO上引出了I2C2，从原理图上看，已经接了PCF8574@38了，总线速度400K,我们的OLED也是接在这上边的,由于这屏幕比较小，显示不了多少东西，就不用FB方式了，直接在应用层操作OLED，所以设备树也不需要配置</p>
- </li>
-<li><p>在应用层操作就跟单片机操作是一样的了，这里为了方便操作屏幕，我分辨率移植u8g2这个库，我手里的哦了的是1.3”的，驱动IC是SHT1106，用1306也可以，只能显示不满屏，可能是基地址定义的不一样</p>
-</li>
-<li><p>我们不需要从OLED读取数据，所以只需要实现I2C写函数就可以，注意OLED模块上标的地址是0x78，这个是8位地址，这里使用的是7位地址，右移一位所以是0x3C</p>
-<pre><code> unsigned char i2c_init()
- &#123;
-     const char *i2c_dev = &quot;/dev/i2c-2&quot;;
-     fd = open(i2c_dev, O_RDWR);
-     if (fd &lt; 0)
-     &#123;
-         printf(&quot;not have /dev/i2c-2 t\r\n&quot;);
-         fflush(stdout);
-         return -1;
-     &#125;
-     return 0;
- &#125;
- // I2C Addr 7bit
- unsigned char base_i2c_write(unsigned char device_addr, unsigned char *buff, int num)
- &#123;
-
-     struct i2c_rdwr_ioctl_data data;
-     struct i2c_msg msgs_str[1];
-     data.msgs = msgs_str;
-     data.nmsgs = 1;
-     data.msgs[0].len = num;
-     data.msgs[0].addr = device_addr;
-     data.msgs[0].flags = 0;
-     data.msgs[0].buf = buff;
-     ioctl(fd, I2C_RDWR, (unsigned long)&amp;data);
- &#125;
-</code></pre>
-</li>
-<li><p>移植u8g2 非常简单，只需修改这下边这个函数里初始化位置和写数据位置就行，另外一个是延时，可以不用修改<br> uint8_t u8x8_byte_hw_i2c(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void <em>arg_ptr)<br> {<br>     &#x2F;</em> u8g2&#x2F;u8x8 will never send more than 32 bytes between START_TRANSFER and END_TRANSFER *&#x2F;<br>     static uint8_t buffer[128];<br>     static uint8_t buf_idx;<br>     uint8_t <em>data;<br><br>     switch (msg)<br>     {<br>     case U8X8_MSG_BYTE_INIT:<br>     {<br>         &#x2F;</em> add your custom code to init i2c subsystem *&#x2F;<br>        i2c_init; &#x2F;&#x2F; I2C初始化<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_START_TRANSFER:<br>     {<br>         buf_idx &#x3D; 0;<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_SEND:<br>     {<br>         data &#x3D; (uint8_t *)arg_ptr;<br><br>         while (arg_int &gt; 0)<br>         {<br>             buffer[buf_idx++] &#x3D; *data;<br>             data++;<br>             arg_int–;<br>         }<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_END_TRANSFER:<br>     {<br>         &#x2F;&#x2F;i2c写函数<br>         if (base_i2c_write(OLED_ADDRESS, buffer, buf_idx) !&#x3D; 0)<br>             return 0;<br>     }<br>     break;<br><br>     case U8X8_MSG_BYTE_SET_DC:<br>         break;<br><br>     default:<br>         return 0;<br>     }<br><br>     return 1;<br> }<br><br> uint8_t u8x8_gpio_and_delay(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void <em>arg_ptr)<br> {<br>     switch (msg)<br>     {<br>     case U8X8_MSG_DELAY_100NANO: &#x2F;&#x2F; delay arg_int * 100 nano seconds<br>         break;<br>     case U8X8_MSG_DELAY_10MICRO: &#x2F;&#x2F; delay arg_int * 10 micro seconds<br>         break;<br>     case U8X8_MSG_DELAY_MILLI: &#x2F;&#x2F; delay arg_int * 1 milli second<br>         break;<br>     case U8X8_MSG_DELAY_I2C:      &#x2F;&#x2F; arg_int is the I2C speed in 100KHz, e.g. 4 &#x3D; 400 KHz<br>         break;                    &#x2F;&#x2F; arg_int&#x3D;1: delay by 5us, arg_int &#x3D; 4: delay by 1.25us<br>     case U8X8_MSG_GPIO_I2C_CLOCK: &#x2F;&#x2F; arg_int&#x3D;0: Output low at I2C clock pin<br>         break;                    &#x2F;&#x2F; arg_int&#x3D;1: Input dir with pullup high for I2C clock pin<br>     case U8X8_MSG_GPIO_I2C_DATA:  &#x2F;&#x2F; arg_int&#x3D;0: Output low at I2C data pin<br>         break;                    &#x2F;&#x2F; arg_int&#x3D;1: Input dir with pullup high for I2C data pin<br>     case U8X8_MSG_GPIO_MENU_SELECT:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu select pin state <em>&#x2F; 0);<br>         break;<br>     case U8X8_MSG_GPIO_MENU_NEXT:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu next pin state <em>&#x2F; 0);<br>         break;<br>     case U8X8_MSG_GPIO_MENU_PREV:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu prev pin state <em>&#x2F; 0);<br>         break;<br>     case U8X8_MSG_GPIO_MENU_HOME:<br>         u8x8_SetGPIOResult(u8x8, &#x2F;</em> get menu home pin state *&#x2F; 0);<br>         break;<br>     default:<br>         u8x8_SetGPIOResult(u8x8, 1); &#x2F;&#x2F; default return value<br>         break;<br>     }<br>     return 1;<br> }</p>
-</li>
-<li><p>这就移植完了，下边编译一下传到开发板里，可以看到显示成功</p>
-</li>
-<li><p>最后附上完整工程</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>D1</tag>
-        <tag>Neza</tag>
-        <tag>I2C</tag>
-        <tag>OLED</tag>
       </tags>
   </entry>
   <entry>
@@ -680,31 +680,6 @@
       </tags>
   </entry>
   <entry>
-    <title>VSCode使用SSH登录无法格式化代码问题</title>
-    <url>/pages/a5bf/</url>
-    <content><![CDATA[<h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>在win10主机上使用VSCode远程登录到Ubuntu18.04主机上写代码，保存时无法自动格式化代码，相关的插件已经安装，本地可以正常格式化代码，但是远程无法格式化，也没有错误提示</p>
-<img src="/pages/a5bf/2023-01-07_151816.png" class="" title="img">
-
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>搜索后，发现可以使用clang-format来格式化程序，由于本地主机无法联网，所以到vscode插件市场下载clang-format插件，通过离线方式安装，装好后，可以选择clang-format来格式化了，此时会提示错误，因为我们的远程Ubuntu主机还没有安装clang-format.</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>输入下边命令进行安装</p>
-<p><em><strong>系统默认的版本太老，这里安装的是ubuntu18.04支持的最新clang-format-10</strong></em></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">sudo apt install clang-format-10</span><br><span class="line">正在读取软件包列表... 完成</span><br><span class="line">正在分析软件包的依赖关系树       </span><br><span class="line">正在读取状态信息... 完成       </span><br><span class="line">将会同时安装下列软件：</span><br><span class="line">  libclang-cpp10</span><br><span class="line">下列【新】软件包将被安装：</span><br><span class="line">  clang-format-10 libclang-cpp10</span><br><span class="line">升级了<span class="number"> 0 </span>个软件包，新安装了<span class="number"> 2 </span>个软件包，要卸载<span class="number"> 0 </span>个软件包，有<span class="number"> 18 </span>个软件包未被升级。</span><br><span class="line">需要下载 10.0 MB 的归档。</span><br><span class="line">解压缩后会消耗 45.3 MB 的额外空间。</span><br><span class="line">您希望继续执行吗？ [Y/n] y</span><br></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>安装完毕后，可执行文件位置在<code>/usr/bin/clang-format-10</code></p>
-<img src="/pages/a5bf/2023-01-07_152906.png" class="" title="img">
-
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>经过测试，远程格式化代码正常，又可以愉快的玩耍了^_^ NICE！</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>vscode</tag>
-        <tag>ssh</tag>
-        <tag>format</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>全志F1C上测试一下ADB功能</title>
     <url>/pages/81fc/</url>
     <content><![CDATA[<h2 id="配置buildroot"><a href="#配置buildroot" class="headerlink" title="配置buildroot"></a>配置buildroot</h2><ol>
@@ -753,6 +728,31 @@
         <tag>Gadget</tag>
         <tag>USB</tag>
         <tag>ADB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VSCode使用SSH登录无法格式化代码问题</title>
+    <url>/pages/a5bf/</url>
+    <content><![CDATA[<h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>在win10主机上使用VSCode远程登录到Ubuntu18.04主机上写代码，保存时无法自动格式化代码，相关的插件已经安装，本地可以正常格式化代码，但是远程无法格式化，也没有错误提示</p>
+<img src="/pages/a5bf/2023-01-07_151816.png" class="" title="img">
+
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>搜索后，发现可以使用clang-format来格式化程序，由于本地主机无法联网，所以到vscode插件市场下载clang-format插件，通过离线方式安装，装好后，可以选择clang-format来格式化了，此时会提示错误，因为我们的远程Ubuntu主机还没有安装clang-format.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>输入下边命令进行安装</p>
+<p><em><strong>系统默认的版本太老，这里安装的是ubuntu18.04支持的最新clang-format-10</strong></em></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">sudo apt install clang-format-10</span><br><span class="line">正在读取软件包列表... 完成</span><br><span class="line">正在分析软件包的依赖关系树       </span><br><span class="line">正在读取状态信息... 完成       </span><br><span class="line">将会同时安装下列软件：</span><br><span class="line">  libclang-cpp10</span><br><span class="line">下列【新】软件包将被安装：</span><br><span class="line">  clang-format-10 libclang-cpp10</span><br><span class="line">升级了<span class="number"> 0 </span>个软件包，新安装了<span class="number"> 2 </span>个软件包，要卸载<span class="number"> 0 </span>个软件包，有<span class="number"> 18 </span>个软件包未被升级。</span><br><span class="line">需要下载 10.0 MB 的归档。</span><br><span class="line">解压缩后会消耗 45.3 MB 的额外空间。</span><br><span class="line">您希望继续执行吗？ [Y/n] y</span><br></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>安装完毕后，可执行文件位置在<code>/usr/bin/clang-format-10</code></p>
+<img src="/pages/a5bf/2023-01-07_152906.png" class="" title="img">
+
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>经过测试，远程格式化代码正常，又可以愉快的玩耍了^_^ NICE！</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>vscode</tag>
+        <tag>ssh</tag>
+        <tag>format</tag>
       </tags>
   </entry>
   <entry>
@@ -1911,7 +1911,7 @@ f. 终端输入riscv64-unknown-linux-gnu-gcc -v 出现版本信息说明外部�
 <img src="/pages/d436/2021-07-28_B.png" class="" title="top">
 <ol>
 <li>首先在buildroot里勾选上bluez5-utils,bluez-tools及blue-alsa</li>
-<li>在内核里勾选<br> [<em>]UART(H4) protocol support<br> [</em>]Realtek Three-wireUART(H5) protocol support<br> 系统启动时会显示如下信息：<br> Starting kernel …<br><br> [    0.000000] Booting Linux on physical CPU 0x0<br> [    0.000000] Linux version 5.10.19 (xfdr@virtualbox) (arm-linux-gnueabihf-gcc (Linaro GCC 7.5-2019.12) 7.5.0, GNU ld (Linaro_Binutils-2019.12) 2.28.2.20170706) #13 SMP Fri Jul 23 12:00:59 CST 2021<br> [    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr&#x3D;10c5387d<br> [    0.000000] CPU: div instructions available: patching division code<br> [    0.000000] CPU: PIPT &#x2F; VIPT nonaliasing data cache, VIPT aliasing instruction cache<br> [    0.000000] OF: fdt: Machine model: Lichee Pi Zero with Dock<br> [    0.000000] Memory policy: Data cache writealloc<br> [    0.000000] cma: Reserved 16 MiB at 0x41c00000<br> [    0.000000] Zone ranges:<br> [    0.000000]   Normal   [mem 0x0000000040000000-0x0000000043ffffff]<br> [    0.000000]   HighMem  empty<br> [    0.000000] Movable zone start for each node<br> [    0.000000] Early memory node ranges<br> [    0.000000]   node   0: [mem 0x0000000040000000-0x0000000043ffffff]<br> [    0.000000] Initmem setup node 0 [mem 0x0000000040000000-0x0000000043ffffff]<br> [    0.000000] psci: probing for conduit method from DT.<br> [    0.000000] psci: Using PSCI v0.1 Function IDs from DT<br> [    0.000000] percpu: Embedded 15 pages&#x2F;cpu s31052 r8192 d22196 u61440<br> [    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 16256<br> [    0.000000] Kernel command line: console&#x3D;ttyS0,115200 panic&#x3D;5 console&#x3D;ttyS0 rootwait vt.global_cursor_default&#x3D;0 root&#x3D;&#x2F;dev&#x2F;mmcblk0p2 earlyprintk rw<br> [    0.000000] Dentry cache hash table entries: 8192 (order: 3, 32768 bytes, linear)<br> [    0.000000] Inode-cache hash table entries: 4096 (order: 2, 16384 bytes, linear)<br> [    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off<br> [    0.000000] Memory: 34900K&#x2F;65536K available (8192K kernel code, 918K rwdata, 2244K rodata, 1024K init, 284K bss, 14252K reserved, 16384K cma-reserved, 0K highmem)<br> [    0.000000] SLUB: HWalign&#x3D;64, Order&#x3D;0-3, MinObjects&#x3D;0, CPUs&#x3D;1, Nodes&#x3D;1<br> [    0.000000] rcu: Hierarchical RCU implementation.<br> [    0.000000] rcu:     RCU restricting CPUs from NR_CPUS&#x3D;8 to nr_cpu_ids&#x3D;1.<br> [    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.<br> [    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf&#x3D;16, nr_cpu_ids&#x3D;1<br> [    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16<br> [    0.000000] GIC: Using split EOI&#x2F;Deactivate mode<br> [    0.000000] random: get_random_bytes called from start_kernel+0x328&#x2F;0x4c0 with crng_init&#x3D;0<br> [    0.000000] arch_timer: cp15 timer(s) running at 24.00MHz (phys).<br> [    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x588fe9dc0, max_idle_ns: 440795202592 ns<br> [    0.000008] sched_clock: 56 bits at 24MHz, resolution 41ns, wraps every 4398046511097ns<br> [    0.000022] Switching to timer-based delay loop, resolution 41ns<br> [    0.000278] clocksource: timer: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 79635851949 ns<br> [    0.000593] Console: colour dummy device 80x30<br> [    0.000661] Calibrating delay loop (skipped), value calculated using timer frequency.. 48.00 BogoMIPS (lpj&#x3D;240000)<br> [    0.000684] pid_max: default: 32768 minimum: 301<br> [    0.000852] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)<br> [    0.000873] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)<br> [    0.001748] CPU: Testing write buffer coherency: ok<br> [    0.002186] &#x2F;cpus&#x2F;cpu@0 missing clock-frequency property<br> [    0.002218] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000<br> [    0.002989] Setting up static identity map for 0x40100000 - 0x40100060<br> [    0.003218] rcu: Hierarchical SRCU implementation.<br> [    0.003764] smp: Bringing up secondary CPUs …<br> [    0.003792] smp: Brought up 1 node, 1 CPU<br> [    0.003802] SMP: Total of 1 processors activated (48.00 BogoMIPS).<br> [    0.003811] CPU: All CPU(s) started in HYP mode.<br> [    0.003818] CPU: Virtualization extensions available.<br> [    0.004452] devtmpfs: initialized<br> [    0.008373] VFP support v0.3: implementor 41 architecture 2 part 30 variant 7 rev 5<br> [    0.008733] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns<br> [    0.008771] futex hash table entries: 256 (order: 2, 16384 bytes, linear)<br> [    0.009561] pinctrl core: initialized pinctrl subsystem<br> [    0.011091] NET: Registered protocol family 16<br> [    0.012326] DMA: preallocated 256 KiB pool for atomic coherent allocations<br> [    0.013612] thermal_sys: Registered thermal governor ‘step_wise’<br> [    0.014006] hw-breakpoint: found 5 (+1 reserved) breakpoint and 4 watchpoint registers.<br> [    0.014032] hw-breakpoint: maximum watchpoint size is 8 bytes.<br> [    0.036802] SCSI subsystem initialized<br> [    0.037553] usbcore: registered new interface driver usbfs<br> [    0.037622] usbcore: registered new interface driver hub<br> [    0.037689] usbcore: registered new device driver usb<br> [    0.037967] mc: Linux media interface: v0.10<br> [    0.038015] videodev: Linux video capture interface: v2.00<br> [    0.038161] pps_core: LinuxPPS API ver. 1 registered<br> [    0.038174] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <a href="mailto:&#103;&#x69;&#111;&#x6d;&#101;&#116;&#x74;&#x69;&#x40;&#x6c;&#105;&#110;&#117;&#120;&#x2e;&#105;&#x74;">&#103;&#x69;&#111;&#x6d;&#101;&#116;&#x74;&#x69;&#x40;&#x6c;&#105;&#110;&#117;&#120;&#x2e;&#105;&#x74;</a><br> [    0.038198] PTP clock support registered<br> [    0.038880] Advanced Linux Sound Architecture Driver Initialized.<br> [    0.039575] Bluetooth: Core ver 2.22<br> [    0.039667] NET: Registered protocol family 31<br> [    0.039679] Bluetooth: HCI device and connection manager initialized<br> [    0.039703] Bluetooth: HCI socket layer initialized<br> [    0.039717] Bluetooth: L2CAP socket layer initialized<br> [    0.039750] Bluetooth: SCO socket layer initialized<br> [    0.040956] clocksource: Switched to clocksource arch_sys_counter<br> [    0.052288] NET: Registered protocol family 2<br> [    0.053034] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 6144 bytes, linear)<br> [    0.053084] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)<br> [    0.053112] TCP bind hash table entries: 1024 (order: 1, 8192 bytes, linear)<br> [    0.053136] TCP: Hash tables configured (established 1024 bind 1024)<br> [    0.053298] UDP hash table entries: 256 (order: 1, 8192 bytes, linear)<br> [    0.053357] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)<br> [    0.053602] NET: Registered protocol family 1<br> [    0.054648] RPC: Registered named UNIX socket transport module.<br> [    0.054681] RPC: Registered udp transport module.<br> [    0.054690] RPC: Registered tcp transport module.<br> [    0.054698] RPC: Registered tcp NFSv4.1 backchannel transport module.<br> [    0.056301] Initialise system trusted keyrings<br> [    0.056732] workingset: timestamp_bits&#x3D;30 max_order&#x3D;14 bucket_order&#x3D;0<br> [    0.063874] NFS: Registering the id_resolver key type<br> [    0.063951] Key type id_resolver registered<br> [    0.063960] Key type id_legacy registered<br> [    0.064015] ntfs: driver 2.1.32 [Flags: R&#x2F;W].<br> [    0.163771] Key type asymmetric registered<br> [    0.163804] Asymmetric key parser ‘x509’ registered<br> [    0.163906] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 246)<br> [    0.163922] io scheduler mq-deadline registered<br> [    0.163931] io scheduler kyber registered<br> [    0.168836] sun8i-v3s-pinctrl 1c20800.pinctrl: initialized sunXi PIO driver<br> [    0.169687] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pb not found, using dummy regulator<br> [    0.170628] pwm-backlight backlight: supply power not found, using dummy regulator<br> [    0.171287] pwm-backlight backlight: invalid default brightness level: 100, using 6<br> [    0.239906] Serial: 8250&#x2F;16550 driver, 8 ports, IRQ sharing disabled<br> [    0.244637] printk: console [ttyS0] disabled<br> [    0.264964] 1c28000.serial: ttyS0 at MMIO 0x1c28000 (irq &#x3D; 45, base_baud &#x3D; 1500000) is a U6_16550A<br> [    0.932953] printk: console [ttyS0] enabled<br> [    0.938208] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pe not found, using dummy regulator<br> [    0.968606] 1c28400.serial: ttyS1 at MMIO 0x1c28400 (irq &#x3D; 46, base_baud &#x3D; 1500000) is a U6_16550A<br> [    0.999932] 1c28800.serial: ttyS2 at MMIO 0x1c28800 (irq &#x3D; 47, base_baud &#x3D; 1500000) is a U6_16550A<br> [    1.014962] panel-simple panel: supply power not found, using dummy regulator<br> [    1.022545] panel-simple panel: Specify missing connector_type<br> [    1.030391] libphy: Fixed MDIO Bus: probed<br> [    1.035212] CAN device driver interface<br> [    1.039657] dwmac-sun8i 1c30000.ethernet: IRQ eth_wake_irq not found<br> [    1.046143] dwmac-sun8i 1c30000.ethernet: IRQ eth_lpi not found<br> [    1.052210] dwmac-sun8i 1c30000.ethernet: No regulator found<br> [    1.057984] dwmac-sun8i 1c30000.ethernet: PTP uses main clock<br> [    1.064221] dwmac-sun8i 1c30000.ethernet: No HW DMA feature register supported<br> [    1.071527] dwmac-sun8i 1c30000.ethernet: RX Checksum Offload Engine supported<br> [    1.078747] dwmac-sun8i 1c30000.ethernet: COE Type 2<br> [    1.083730] dwmac-sun8i 1c30000.ethernet: TX Checksum insertion supported<br> [    1.090514] dwmac-sun8i 1c30000.ethernet: Normal descriptors<br> [    1.096184] dwmac-sun8i 1c30000.ethernet: Chain mode enabled<br> [    1.101867] dwmac-sun8i 1c30000.ethernet: device MAC address d6:56:90:e0:09:09<br> [    1.109732] libphy: stmmac: probed<br> [    1.114430] dwmac-sun8i 1c30000.ethernet: Found internal PHY node<br> [    1.121248] libphy: mdio_mux: probed<br> [    1.124869] dwmac-sun8i 1c30000.ethernet: Switch mux to internal PHY<br> [    1.131286] dwmac-sun8i 1c30000.ethernet: Powering internal PHY<br> [    1.139085] ehci_hcd: USB 2.0 ‘Enhanced’ Host Controller (EHCI) Driver<br> [    1.145759] ehci-platform: EHCI generic platform driver<br> [    1.151239] ohci_hcd: USB 1.1 ‘Open’ Host Controller (OHCI) Driver<br> [    1.157465] ohci-platform: OHCI generic platform driver<br> [    1.164161] input: 1c22800.lradc as &#x2F;devices&#x2F;platform&#x2F;soc&#x2F;1c22800.lradc&#x2F;input&#x2F;input0<br> [    1.173440] rotary-encoder rotary@0: gray<br> [    1.178460] input: rotary@0 as &#x2F;devices&#x2F;platform&#x2F;rotary@0&#x2F;input&#x2F;input1<br> [    1.187134] sun6i-rtc 1c20400.rtc: registered as rtc0<br> [    1.192416] sun6i-rtc 1c20400.rtc: setting system clock to 1970-01-01T01:26:51 UTC (5211)<br> [    1.200591] sun6i-rtc 1c20400.rtc: RTC enabled<br> [    1.205482] i2c &#x2F;dev entries driver<br> [    1.210476] input: ns2009_ts as &#x2F;devices&#x2F;platform&#x2F;soc&#x2F;1c2ac00.i2c&#x2F;i2c-0&#x2F;0-0048&#x2F;input&#x2F;input2<br> [    1.220426] Driver for 1-wire Dallas network protocol.<br> [    1.227208] sunxi-wdt 1c20ca0.watchdog: Watchdog enabled (timeout&#x3D;16 sec, nowayout&#x3D;0)<br> [    1.235342] Bluetooth: HCI UART driver ver 2.3<br> [    1.239793] Bluetooth: HCI UART protocol H4 registered<br> [    1.245041] Bluetooth: HCI UART protocol Three-wire (H5) registered<br> [    1.252426] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pf not found, using dummy regulator<br> [    1.263407] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pg not found, using dummy regulator<br> [    1.274623] ledtrig-cpu: registered to indicate activity on CPUs<br> [    1.281222] sun4i-ss 1c15000.crypto: Die ID 7<br> [    1.288761] usbcore: registered new interface driver usbhid<br> [    1.294484] usbhid: USB HID core driver<br> [    1.299370] sunxi-mmc 1c0f000.mmc: initialized, max. request size: 16384 KB<br> [    1.306740] sunxi-mmc 1c10000.mmc: initialized, max. request size: 16384 KB<br> [    1.316119] sun4i-codec 1c22c00.codec: Failed to register our card<br> [    1.324501] NET: Registered protocol family 17<br> [    1.328998] can: controller area network core<br> [    1.333627] NET: Registered protocol family 29<br> [    1.338086] can: raw protocol<br> [    1.341133] can: broadcast manager protocol<br> [    1.345329] can: netlink gateway - max_hops&#x3D;1<br> [    1.350297] Bluetooth: RFCOMM TTY layer initialized<br> [    1.355353] Bluetooth: RFCOMM socket layer initialized<br> [    1.360538] Bluetooth: RFCOMM ver 1.11<br> [    1.364363] Bluetooth: BNEP (Ethernet Emulation) ver 1.3<br> [    1.369672] Bluetooth: BNEP filters: protocol multicast<br> [    1.374928] Bluetooth: BNEP socket layer initialized<br> [    1.379890] Bluetooth: HIDP (Human Interface Emulation) ver 1.2<br> [    1.385825] Bluetooth: HIDP socket layer initialized<br> [    1.391148] Key type dns_resolver registered<br> [    1.395595] Registering SWP&#x2F;SWPB emulation handler<br> [    1.400448] Loading compiled-in X.509 certificates<br> [    1.437437] sun4i-drm display-engine: bound 1100000.mixer (ops 0xc097c610)<br> [    1.445077] sun4i-drm display-engine: bound 1c0c000.lcd-controller (ops 0xc097891c)<br> [    1.453961] [drm] Initialized sun4i-drm 1.0.0 20150629 for display-engine on minor 0<br> [    1.465480] sunxi-mmc 1c10000.mmc: card claims to support voltages below defined range<br> [    1.475874] mmc1: new high speed SDIO card at address 0001<br> [    1.493616] mmc0: host does not support reading read-only switch, assuming write-enable<br> [    1.495706] mmc0: new high speed SDHC card at address 0002<br> [    1.496918] mmcblk0: mmc0:0002 MSD20 3.73 GiB<br> [    1.499651]  mmcblk0: p1 p2 p3<br> [    1.507412] Console: switching to colour frame buffer device 100x30<br> [    1.566756] sun4i-drm display-engine: [drm] fb0: sun4i-drmdrmfb frame buffer device<br> [    1.576864] debugfs: Directory ‘1c22c00.codec’ with parent ‘V3s Audio Codec’ already present!<br> [    1.591054] ALSA device list:<br> [    1.594055]   #0: V3s Audio Codec<br> [    1.612781] EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null)<br> [    1.621158] VFS: Mounted root (ext4 filesystem) on device 179:2.<br> [    1.629553] devtmpfs: mounted<br> [    1.633946] Freeing unused kernel memory: 1024K<br> [    1.638711] Run &#x2F;sbin&#x2F;init as init process<br> [    1.690069] random: fast init done<br> [    1.792914] EXT4-fs (mmcblk0p2): re-mounted. Opts: (null)<br> Starting syslogd: OK<br> Starting klogd: OK<br> Running sysctl: OK<br> Starting mdev… OK<br> [    3.206544] cfg80211: Loading compiled-in X.509 certificates for regulatory database<br> [    3.248879] cfg80211: Loaded X.509 cert ‘sforshee: 00b28ddf47aef9cea7’<br> [    3.258062] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2<br> [    3.266896] cfg80211: failed to load regulatory.db<br> [    3.359658] 8723ds: module is from the staging directory, the quality is unknown, you have been warned.<br> Initializing random number generator: OK<br> Saving random seed: [    3.742299] random: dd: uninitialized urandom read (512 bytes read)<br> OK<br> Starting system message bus: [    3.812938] random: dbus-uuidgen: uninitialized urandom read (12 bytes read)<br> [    3.820155] random: dbus-uuidgen: uninitialized urandom read (8 bytes read)<br> done<br> Starting bluetoothd: OK<br> Starting network: OK<br> [    6.200965] random: crng init done<br> [    6.204396] random: 3 urandom warning(s) missed due to ratelimiting<br> Starting sshd: OK<br> Welcome to Buildroot for the LicheePi Zero<br> licheepi-zero login: </li>
+<li>在内核里勾选<br> [<em>]UART(H4) protocol support<br> [</em>]Realtek Three-wireUART(H5) protocol support<br> 系统启动时会显示如下信息：<br> Starting kernel …<br><br> [    0.000000] Booting Linux on physical CPU 0x0<br> [    0.000000] Linux version 5.10.19 (xfdr@virtualbox) (arm-linux-gnueabihf-gcc (Linaro GCC 7.5-2019.12) 7.5.0, GNU ld (Linaro_Binutils-2019.12) 2.28.2.20170706) #13 SMP Fri Jul 23 12:00:59 CST 2021<br> [    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr&#x3D;10c5387d<br> [    0.000000] CPU: div instructions available: patching division code<br> [    0.000000] CPU: PIPT &#x2F; VIPT nonaliasing data cache, VIPT aliasing instruction cache<br> [    0.000000] OF: fdt: Machine model: Lichee Pi Zero with Dock<br> [    0.000000] Memory policy: Data cache writealloc<br> [    0.000000] cma: Reserved 16 MiB at 0x41c00000<br> [    0.000000] Zone ranges:<br> [    0.000000]   Normal   [mem 0x0000000040000000-0x0000000043ffffff]<br> [    0.000000]   HighMem  empty<br> [    0.000000] Movable zone start for each node<br> [    0.000000] Early memory node ranges<br> [    0.000000]   node   0: [mem 0x0000000040000000-0x0000000043ffffff]<br> [    0.000000] Initmem setup node 0 [mem 0x0000000040000000-0x0000000043ffffff]<br> [    0.000000] psci: probing for conduit method from DT.<br> [    0.000000] psci: Using PSCI v0.1 Function IDs from DT<br> [    0.000000] percpu: Embedded 15 pages&#x2F;cpu s31052 r8192 d22196 u61440<br> [    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 16256<br> [    0.000000] Kernel command line: console&#x3D;ttyS0,115200 panic&#x3D;5 console&#x3D;ttyS0 rootwait vt.global_cursor_default&#x3D;0 root&#x3D;&#x2F;dev&#x2F;mmcblk0p2 earlyprintk rw<br> [    0.000000] Dentry cache hash table entries: 8192 (order: 3, 32768 bytes, linear)<br> [    0.000000] Inode-cache hash table entries: 4096 (order: 2, 16384 bytes, linear)<br> [    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off<br> [    0.000000] Memory: 34900K&#x2F;65536K available (8192K kernel code, 918K rwdata, 2244K rodata, 1024K init, 284K bss, 14252K reserved, 16384K cma-reserved, 0K highmem)<br> [    0.000000] SLUB: HWalign&#x3D;64, Order&#x3D;0-3, MinObjects&#x3D;0, CPUs&#x3D;1, Nodes&#x3D;1<br> [    0.000000] rcu: Hierarchical RCU implementation.<br> [    0.000000] rcu:     RCU restricting CPUs from NR_CPUS&#x3D;8 to nr_cpu_ids&#x3D;1.<br> [    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.<br> [    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf&#x3D;16, nr_cpu_ids&#x3D;1<br> [    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16<br> [    0.000000] GIC: Using split EOI&#x2F;Deactivate mode<br> [    0.000000] random: get_random_bytes called from start_kernel+0x328&#x2F;0x4c0 with crng_init&#x3D;0<br> [    0.000000] arch_timer: cp15 timer(s) running at 24.00MHz (phys).<br> [    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x588fe9dc0, max_idle_ns: 440795202592 ns<br> [    0.000008] sched_clock: 56 bits at 24MHz, resolution 41ns, wraps every 4398046511097ns<br> [    0.000022] Switching to timer-based delay loop, resolution 41ns<br> [    0.000278] clocksource: timer: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 79635851949 ns<br> [    0.000593] Console: colour dummy device 80x30<br> [    0.000661] Calibrating delay loop (skipped), value calculated using timer frequency.. 48.00 BogoMIPS (lpj&#x3D;240000)<br> [    0.000684] pid_max: default: 32768 minimum: 301<br> [    0.000852] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)<br> [    0.000873] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)<br> [    0.001748] CPU: Testing write buffer coherency: ok<br> [    0.002186] &#x2F;cpus&#x2F;cpu@0 missing clock-frequency property<br> [    0.002218] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000<br> [    0.002989] Setting up static identity map for 0x40100000 - 0x40100060<br> [    0.003218] rcu: Hierarchical SRCU implementation.<br> [    0.003764] smp: Bringing up secondary CPUs …<br> [    0.003792] smp: Brought up 1 node, 1 CPU<br> [    0.003802] SMP: Total of 1 processors activated (48.00 BogoMIPS).<br> [    0.003811] CPU: All CPU(s) started in HYP mode.<br> [    0.003818] CPU: Virtualization extensions available.<br> [    0.004452] devtmpfs: initialized<br> [    0.008373] VFP support v0.3: implementor 41 architecture 2 part 30 variant 7 rev 5<br> [    0.008733] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns<br> [    0.008771] futex hash table entries: 256 (order: 2, 16384 bytes, linear)<br> [    0.009561] pinctrl core: initialized pinctrl subsystem<br> [    0.011091] NET: Registered protocol family 16<br> [    0.012326] DMA: preallocated 256 KiB pool for atomic coherent allocations<br> [    0.013612] thermal_sys: Registered thermal governor ‘step_wise’<br> [    0.014006] hw-breakpoint: found 5 (+1 reserved) breakpoint and 4 watchpoint registers.<br> [    0.014032] hw-breakpoint: maximum watchpoint size is 8 bytes.<br> [    0.036802] SCSI subsystem initialized<br> [    0.037553] usbcore: registered new interface driver usbfs<br> [    0.037622] usbcore: registered new interface driver hub<br> [    0.037689] usbcore: registered new device driver usb<br> [    0.037967] mc: Linux media interface: v0.10<br> [    0.038015] videodev: Linux video capture interface: v2.00<br> [    0.038161] pps_core: LinuxPPS API ver. 1 registered<br> [    0.038174] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <a href="mailto:&#x67;&#105;&#x6f;&#x6d;&#101;&#x74;&#x74;&#105;&#64;&#108;&#x69;&#110;&#x75;&#x78;&#46;&#105;&#x74;">&#x67;&#105;&#x6f;&#x6d;&#101;&#x74;&#x74;&#105;&#64;&#108;&#x69;&#110;&#x75;&#x78;&#46;&#105;&#x74;</a><br> [    0.038198] PTP clock support registered<br> [    0.038880] Advanced Linux Sound Architecture Driver Initialized.<br> [    0.039575] Bluetooth: Core ver 2.22<br> [    0.039667] NET: Registered protocol family 31<br> [    0.039679] Bluetooth: HCI device and connection manager initialized<br> [    0.039703] Bluetooth: HCI socket layer initialized<br> [    0.039717] Bluetooth: L2CAP socket layer initialized<br> [    0.039750] Bluetooth: SCO socket layer initialized<br> [    0.040956] clocksource: Switched to clocksource arch_sys_counter<br> [    0.052288] NET: Registered protocol family 2<br> [    0.053034] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 6144 bytes, linear)<br> [    0.053084] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)<br> [    0.053112] TCP bind hash table entries: 1024 (order: 1, 8192 bytes, linear)<br> [    0.053136] TCP: Hash tables configured (established 1024 bind 1024)<br> [    0.053298] UDP hash table entries: 256 (order: 1, 8192 bytes, linear)<br> [    0.053357] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)<br> [    0.053602] NET: Registered protocol family 1<br> [    0.054648] RPC: Registered named UNIX socket transport module.<br> [    0.054681] RPC: Registered udp transport module.<br> [    0.054690] RPC: Registered tcp transport module.<br> [    0.054698] RPC: Registered tcp NFSv4.1 backchannel transport module.<br> [    0.056301] Initialise system trusted keyrings<br> [    0.056732] workingset: timestamp_bits&#x3D;30 max_order&#x3D;14 bucket_order&#x3D;0<br> [    0.063874] NFS: Registering the id_resolver key type<br> [    0.063951] Key type id_resolver registered<br> [    0.063960] Key type id_legacy registered<br> [    0.064015] ntfs: driver 2.1.32 [Flags: R&#x2F;W].<br> [    0.163771] Key type asymmetric registered<br> [    0.163804] Asymmetric key parser ‘x509’ registered<br> [    0.163906] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 246)<br> [    0.163922] io scheduler mq-deadline registered<br> [    0.163931] io scheduler kyber registered<br> [    0.168836] sun8i-v3s-pinctrl 1c20800.pinctrl: initialized sunXi PIO driver<br> [    0.169687] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pb not found, using dummy regulator<br> [    0.170628] pwm-backlight backlight: supply power not found, using dummy regulator<br> [    0.171287] pwm-backlight backlight: invalid default brightness level: 100, using 6<br> [    0.239906] Serial: 8250&#x2F;16550 driver, 8 ports, IRQ sharing disabled<br> [    0.244637] printk: console [ttyS0] disabled<br> [    0.264964] 1c28000.serial: ttyS0 at MMIO 0x1c28000 (irq &#x3D; 45, base_baud &#x3D; 1500000) is a U6_16550A<br> [    0.932953] printk: console [ttyS0] enabled<br> [    0.938208] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pe not found, using dummy regulator<br> [    0.968606] 1c28400.serial: ttyS1 at MMIO 0x1c28400 (irq &#x3D; 46, base_baud &#x3D; 1500000) is a U6_16550A<br> [    0.999932] 1c28800.serial: ttyS2 at MMIO 0x1c28800 (irq &#x3D; 47, base_baud &#x3D; 1500000) is a U6_16550A<br> [    1.014962] panel-simple panel: supply power not found, using dummy regulator<br> [    1.022545] panel-simple panel: Specify missing connector_type<br> [    1.030391] libphy: Fixed MDIO Bus: probed<br> [    1.035212] CAN device driver interface<br> [    1.039657] dwmac-sun8i 1c30000.ethernet: IRQ eth_wake_irq not found<br> [    1.046143] dwmac-sun8i 1c30000.ethernet: IRQ eth_lpi not found<br> [    1.052210] dwmac-sun8i 1c30000.ethernet: No regulator found<br> [    1.057984] dwmac-sun8i 1c30000.ethernet: PTP uses main clock<br> [    1.064221] dwmac-sun8i 1c30000.ethernet: No HW DMA feature register supported<br> [    1.071527] dwmac-sun8i 1c30000.ethernet: RX Checksum Offload Engine supported<br> [    1.078747] dwmac-sun8i 1c30000.ethernet: COE Type 2<br> [    1.083730] dwmac-sun8i 1c30000.ethernet: TX Checksum insertion supported<br> [    1.090514] dwmac-sun8i 1c30000.ethernet: Normal descriptors<br> [    1.096184] dwmac-sun8i 1c30000.ethernet: Chain mode enabled<br> [    1.101867] dwmac-sun8i 1c30000.ethernet: device MAC address d6:56:90:e0:09:09<br> [    1.109732] libphy: stmmac: probed<br> [    1.114430] dwmac-sun8i 1c30000.ethernet: Found internal PHY node<br> [    1.121248] libphy: mdio_mux: probed<br> [    1.124869] dwmac-sun8i 1c30000.ethernet: Switch mux to internal PHY<br> [    1.131286] dwmac-sun8i 1c30000.ethernet: Powering internal PHY<br> [    1.139085] ehci_hcd: USB 2.0 ‘Enhanced’ Host Controller (EHCI) Driver<br> [    1.145759] ehci-platform: EHCI generic platform driver<br> [    1.151239] ohci_hcd: USB 1.1 ‘Open’ Host Controller (OHCI) Driver<br> [    1.157465] ohci-platform: OHCI generic platform driver<br> [    1.164161] input: 1c22800.lradc as &#x2F;devices&#x2F;platform&#x2F;soc&#x2F;1c22800.lradc&#x2F;input&#x2F;input0<br> [    1.173440] rotary-encoder rotary@0: gray<br> [    1.178460] input: rotary@0 as &#x2F;devices&#x2F;platform&#x2F;rotary@0&#x2F;input&#x2F;input1<br> [    1.187134] sun6i-rtc 1c20400.rtc: registered as rtc0<br> [    1.192416] sun6i-rtc 1c20400.rtc: setting system clock to 1970-01-01T01:26:51 UTC (5211)<br> [    1.200591] sun6i-rtc 1c20400.rtc: RTC enabled<br> [    1.205482] i2c &#x2F;dev entries driver<br> [    1.210476] input: ns2009_ts as &#x2F;devices&#x2F;platform&#x2F;soc&#x2F;1c2ac00.i2c&#x2F;i2c-0&#x2F;0-0048&#x2F;input&#x2F;input2<br> [    1.220426] Driver for 1-wire Dallas network protocol.<br> [    1.227208] sunxi-wdt 1c20ca0.watchdog: Watchdog enabled (timeout&#x3D;16 sec, nowayout&#x3D;0)<br> [    1.235342] Bluetooth: HCI UART driver ver 2.3<br> [    1.239793] Bluetooth: HCI UART protocol H4 registered<br> [    1.245041] Bluetooth: HCI UART protocol Three-wire (H5) registered<br> [    1.252426] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pf not found, using dummy regulator<br> [    1.263407] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pg not found, using dummy regulator<br> [    1.274623] ledtrig-cpu: registered to indicate activity on CPUs<br> [    1.281222] sun4i-ss 1c15000.crypto: Die ID 7<br> [    1.288761] usbcore: registered new interface driver usbhid<br> [    1.294484] usbhid: USB HID core driver<br> [    1.299370] sunxi-mmc 1c0f000.mmc: initialized, max. request size: 16384 KB<br> [    1.306740] sunxi-mmc 1c10000.mmc: initialized, max. request size: 16384 KB<br> [    1.316119] sun4i-codec 1c22c00.codec: Failed to register our card<br> [    1.324501] NET: Registered protocol family 17<br> [    1.328998] can: controller area network core<br> [    1.333627] NET: Registered protocol family 29<br> [    1.338086] can: raw protocol<br> [    1.341133] can: broadcast manager protocol<br> [    1.345329] can: netlink gateway - max_hops&#x3D;1<br> [    1.350297] Bluetooth: RFCOMM TTY layer initialized<br> [    1.355353] Bluetooth: RFCOMM socket layer initialized<br> [    1.360538] Bluetooth: RFCOMM ver 1.11<br> [    1.364363] Bluetooth: BNEP (Ethernet Emulation) ver 1.3<br> [    1.369672] Bluetooth: BNEP filters: protocol multicast<br> [    1.374928] Bluetooth: BNEP socket layer initialized<br> [    1.379890] Bluetooth: HIDP (Human Interface Emulation) ver 1.2<br> [    1.385825] Bluetooth: HIDP socket layer initialized<br> [    1.391148] Key type dns_resolver registered<br> [    1.395595] Registering SWP&#x2F;SWPB emulation handler<br> [    1.400448] Loading compiled-in X.509 certificates<br> [    1.437437] sun4i-drm display-engine: bound 1100000.mixer (ops 0xc097c610)<br> [    1.445077] sun4i-drm display-engine: bound 1c0c000.lcd-controller (ops 0xc097891c)<br> [    1.453961] [drm] Initialized sun4i-drm 1.0.0 20150629 for display-engine on minor 0<br> [    1.465480] sunxi-mmc 1c10000.mmc: card claims to support voltages below defined range<br> [    1.475874] mmc1: new high speed SDIO card at address 0001<br> [    1.493616] mmc0: host does not support reading read-only switch, assuming write-enable<br> [    1.495706] mmc0: new high speed SDHC card at address 0002<br> [    1.496918] mmcblk0: mmc0:0002 MSD20 3.73 GiB<br> [    1.499651]  mmcblk0: p1 p2 p3<br> [    1.507412] Console: switching to colour frame buffer device 100x30<br> [    1.566756] sun4i-drm display-engine: [drm] fb0: sun4i-drmdrmfb frame buffer device<br> [    1.576864] debugfs: Directory ‘1c22c00.codec’ with parent ‘V3s Audio Codec’ already present!<br> [    1.591054] ALSA device list:<br> [    1.594055]   #0: V3s Audio Codec<br> [    1.612781] EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null)<br> [    1.621158] VFS: Mounted root (ext4 filesystem) on device 179:2.<br> [    1.629553] devtmpfs: mounted<br> [    1.633946] Freeing unused kernel memory: 1024K<br> [    1.638711] Run &#x2F;sbin&#x2F;init as init process<br> [    1.690069] random: fast init done<br> [    1.792914] EXT4-fs (mmcblk0p2): re-mounted. Opts: (null)<br> Starting syslogd: OK<br> Starting klogd: OK<br> Running sysctl: OK<br> Starting mdev… OK<br> [    3.206544] cfg80211: Loading compiled-in X.509 certificates for regulatory database<br> [    3.248879] cfg80211: Loaded X.509 cert ‘sforshee: 00b28ddf47aef9cea7’<br> [    3.258062] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2<br> [    3.266896] cfg80211: failed to load regulatory.db<br> [    3.359658] 8723ds: module is from the staging directory, the quality is unknown, you have been warned.<br> Initializing random number generator: OK<br> Saving random seed: [    3.742299] random: dd: uninitialized urandom read (512 bytes read)<br> OK<br> Starting system message bus: [    3.812938] random: dbus-uuidgen: uninitialized urandom read (12 bytes read)<br> [    3.820155] random: dbus-uuidgen: uninitialized urandom read (8 bytes read)<br> done<br> Starting bluetoothd: OK<br> Starting network: OK<br> [    6.200965] random: crng init done<br> [    6.204396] random: 3 urandom warning(s) missed due to ratelimiting<br> Starting sshd: OK<br> Welcome to Buildroot for the LicheePi Zero<br> licheepi-zero login: </li>
 <li>UART2默认速率是9600可以使用cat &#x2F;dev&#x2F;ttyS2来测试串口是否正常</li>
 <li>使用rtk_hciattach绑定uart端口<br> rtk_hciattach -n -s 115200&#x2F;dev&#x2F;ttyS2 rtk_h5 &amp;</li>
 </ol>
