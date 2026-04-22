@@ -1,0 +1,1188 @@
+---
+title: WEB界面在线预览
+tags:
+  - ESP32
+  - firmware
+categories: ESP32桌面气象站-LCD触控版
+abbrlink: ebf7
+date: 2020-12-26 13:02:49
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link href="
+        https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://s0.pstatp.com/cdn/expire-1-M/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet">
+    <link href="https://s3.pstatp.com/cdn/expire-1-M/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css"
+        rel="stylesheet">
+    <link href="https://s1.pstatp.com/cdn/expire-1-M/bootstrap-slider/10.6.1/css/bootstrap-slider.min.css"
+        rel="stylesheet">
+    <link href="https://s1.pstatp.com/cdn/expire-1-M/pretty-checkbox/3.0.3/pretty-checkbox.min.css" rel="stylesheet">
+    <title>WIFI桌面气象站</title>
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            /* Set the fixed height of the footer here */
+            line-height: 60px;
+            /* Vertically center the text there */
+            background-color: #f5f5f5;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+            vertical-align: middle !important;
+        }
+
+        #brightness-slider .slider-selection {
+            background: rgb(0, 155, 245);
+        }
+
+        label {
+            margin-top: 8px;
+        }
+
+        strong {
+            font-size: 1.3em;
+            color: cornflowerblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3 style="text-align:center;color: dodgerblue">WIFI桌面气象站</h3>
+    <div class="container" style="width:600px;">
+        <div id="he-plugin-standard"></div>
+        <br>
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#_home" tabindex="0" data-toggle="tab">网络设置</a></li>
+            <li><a href="#_alarm" tabindex="1" data-toggle="tab">闹钟设置</a></li>
+            <li><a href="#_weather" tabindex="2" data-toggle="tab">天气配置</a></li>
+            <li><a href="#_tips" tabindex="3" data-toggle="tab">备忘录</a></li>
+            <li><a href="#_temp" tabindex="4" data-toggle="tab">温湿度</a></li>
+            <li><a href="#_other" tabindex="5" data-toggle="tab">其它</a></li>
+            <li><a href="#_about" tabindex="6" data-toggle="tab">关于</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="_home">
+                <form>
+                    <br>
+                    <strong>WiFi设置:</strong>
+                    <hr>
+                    <div id="static_ip">
+                        <div class="form-group row">
+                            <label for="ip" class="col-sm-4 col-form-label">无线网络:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="ssid" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mask" class="col-sm-4 col-form-label">WiFi密码:</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="password" placeholder="长度16个字符以内">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <strong>邮箱设置:</strong>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="ip" class="col-sm-4 col-form-label">SMTP服务器:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="email_host" placeholder="smtp.126.com">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ip" class="col-sm-4 col-form-label">服务器端口:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="email_port" placeholder="25">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mask" class="col-sm-4 col-form-label">用户名:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="email_user" placeholder="xxxx@126.com">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mask" class="col-sm-4 col-form-label">密码:</label>
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control" id="email_pwd" placeholder="邮箱登录密码">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mask" class="col-sm-4 col-form-label">接收邮箱:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="email_rcv" placeholder="多个请用英文逗号(,)隔开">必须英文分号:
+                        </div>
+                        <a type="button" class="btn btn-success" style="margin-left:10px"
+                            id="set_email">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                    </div>
+
+                </form>
+            </div>
+            <div class="tab-pane fade" id="_alarm">
+                <br>
+                <strong>闹钟设置:</strong>
+                <hr>
+                <div class="panel panel-default">
+
+                    <div class="panel-heading text-center">闹钟列表</div>
+
+                    <table class="table table-bordered">
+                        <thead class="">
+                            <th width=60>名称</th>
+                            <th width=60>开关</th>
+                            <th>模式</th>
+                            <th width=150>日期</th>
+                            <th width=150>时间</th>
+                        </thead>
+                        <tbody id="alarm_list">
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <div class="form-group row">
+                    <label for="datetime" class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-6">
+
+                    </div>
+                    <a type="button" class="btn btn-success"
+                        id="set_alarm">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                </div>
+                <br>
+                <strong>RTC设置:</strong>
+                <hr>
+                <div class="form-group row">
+                    <label for="rtc_time" class="col-sm-4 col-form-label">修改时间:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="rtc_time">
+                    </div>
+                    <a type="button" data-toggle="tooltip" title="使用本机时间设置RTC" class="btn btn-warning"
+                        id="set_rtc_time">本机时间</a>
+                </div>
+                <br>
+                <br>
+                <strong>GPS设置:</strong>
+                <br>
+                <hr>
+                <div class="form-group row">
+                    <label for="gps_status" class="col-sm-4 col-form-label">开关:</label>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <input type="checkbox" id="gps_status" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="gps_time" class="col-sm-4 col-form-label">GPS对时间隔:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="gps_update_time">
+                    </div>
+
+                    <a type="button" data-toggle="tooltip" title="对时间隔1~60分钟" class="btn btn-warning"
+                        id="set_gps_time">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                </div>
+                <div class="row">
+                    <label for="gps_time" class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-6">单位:分钟</div>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="_weather">
+                <br>
+                <strong>天气API接口配置:</strong>
+                <hr>
+                <div>
+                    <div class="form-group row">
+                        <label for="status" class="col-sm-4 col-form-label">自动定位:</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <input type="checkbox" checked id="is_auto_location" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" form-group row">
+                        <label for="app_key" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-6">
+                            <span style="color: red;">当自动定位错误时，可以手动指定位置</span>
+                        </div>
+                    </div>
+                    <div id="auto_location" hidden>
+                        <div class="form-group row">
+                            <label for="city" class="col-sm-4 col-form-label">经纬度坐标:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="city_location" placeholder="获取的经纬度粘贴到此处">
+                            </div>
+                            <a class="btn btn-primary" href="https://lbs.amap.com/console/show/picker"
+                                target="_blank">地图取点</a>
+                        </div>
+                        <div class="form-group row">
+                            <label for="city" class="col-sm-4 col-form-label">坐标名称:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="city_name" placeholder="上边经纬度坐标的别名">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="app_key" class="col-sm-4 col-form-label">APP Key:</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="app_key" placeholder="app key">
+                            </div>
+                            <a type="button" class="btn btn-warning"
+                                id="check">&nbsp;&nbsp;验&nbsp;&nbsp;&nbsp;证&nbsp;&nbsp;</a>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="app_key" class="col-sm-4 col-form-label"></label>
+                            <div class="col-sm-6">
+                                <span style="color: red;">此key仅供测试使用，请替换为你自己的key</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="sign" class="col-sm-4 col-form-label">更新频率:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="update_period" placeholder="单位分钟">
+                        </div>
+                        <div style="margin-top: 10px;">1~120分钟</div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="_tips">
+
+                <br>
+                <strong>备忘录:</strong>
+                <hr>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-2 col-form-label">内容:</label>
+                    <div class="col-sm-8">
+                        <textarea type="text" maxlength="40" placeholder="长度不超过40个英文字符或20个中文" class="form-control"
+                            id="tips"></textarea>
+                    </div>
+                    <a type="button" class="btn btn-success"
+                        id="set_tips">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                </div>
+                <br>
+                <strong>待办事项:</strong>`
+                <hr>
+                <div id="to_do_list"></div>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-6"></div>
+                    <a type="button" class="btn btn-success"
+                        id="set_to_do_list">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="_other">
+                <br>
+                <strong>屏幕亮度:</strong>
+                <hr>
+                <br>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-4 col-form-label">亮度1:</label>
+                    <div class="col-sm-6">
+                        <div style="height: auto;">
+                            <strong>0&nbsp;</strong>
+                            <input type="text" id="brightness1">
+                            <strong>&nbsp;100</strong>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-4 col-form-label">亮度2:</label>
+                    <div class="col-sm-6">
+                        <div style="height: auto;">
+                            <strong>0&nbsp;</strong>
+                            <input type="text" id="brightness2">
+                            <strong>&nbsp;100</strong>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-4 col-form-label">亮度1时段:</label>
+                    <div class="col-sm-6">
+                        <div style="height: auto;">
+                            <strong>0&nbsp;</strong>
+                            <input id="brightness_time" type="text" />
+                            <strong>&nbsp;23</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div for="server" class="col-sm-8" style="color: red;">注:不在此时段，则为亮度2</div>
+                    <a type="button" class="btn btn-success"
+                        id="set_brightness">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                    <div class="col-sm-2"></div>
+
+                </div>
+                <br>
+                <strong>播报时段:</strong>
+                <hr>
+                <br>
+                <div class="form-group row">
+                    <label for="status" class="col-sm-4 col-form-label">开关:</label>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <input type="checkbox" checked id="voice_status" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-4 col-form-label">时段:</label>
+                    <div class="col-sm-6">
+                        <div style="height: auto;">
+                            <strong>0&nbsp;&nbsp;</strong>
+                            <input id="voice-slider" type="text" />
+                            <strong>&nbsp;&nbsp;23</strong>
+                        </div>
+                    </div>
+                    <a type="button" class="btn btn-success"
+                        id="set_voice">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                </div>
+                <br>
+                <strong>默认页面:</strong>
+                <hr>
+                <div class="form-group row">
+                    <label for="server" class="col-sm-4 col-form-label">选择页面:</label>
+                    <div class="col-sm-6">
+                        <select id="default_page" class="form-control">
+                            <option value="0">桌面</option>
+                            <option value="1">气象站</option>
+                            <option value="2">万年历</option>
+                            <option value="3">空气质量</option>
+                            <option value="4">模拟时钟</option>
+                            <option value="5">数字时钟</option>
+                            <option value="6">温湿度</option>
+                            <option value="7">备忘录</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="_temp">
+                <br>
+                <strong>温度报警设置:</strong>
+                <hr>
+                <div class="form-group row">
+                    <label for="temp_alarm" class="col-sm-4 col-form-label">开关:</label>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <input type="checkbox" id="temp_alarm" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="temp_alarm" class="col-sm-4 col-form-label">条件:</label>
+                    <div class="col-sm-4">
+                        <select id="temp_exp" class="form-control">
+                            <option value="&gt;">大于</option>
+                            <option value="&gt;=">大于等于</option>
+                            <option value="=">等于</option>
+                            <option value="&lt;">小于</option>
+                            <option value="&lt;=">小于等于</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="temp">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="temp_alarm" class="col-sm-4 col-form-label">动作:</label>
+                    <div class="col-sm-4">
+                        <select id="temp_alarm_action" class="form-control">
+                            <option value="0">蜂鸣报警</option>
+                            <option value="1">语音报警</option>
+                            <option value="2">邮件通知</option>
+                        </select>
+                    </div>
+                    <a type="button" class="btn btn-success" style="margin-left:10px"
+                        id="set_temp_alarm">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                </div>
+                <br>
+                <strong>湿度报警设置:</strong>
+                <hr>
+                <div class="form-group row">
+                    <label for="huim_alarm" class="col-sm-4 col-form-label">开关:</label>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <input type="checkbox" id="huim_alarm" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="huim_alarm" class="col-sm-4 col-form-label">条件:</label>
+                    <div class="col-sm-4">
+                        <select id="huim_exp" class="form-control">
+                            <option value="&gt;">大于</option>
+                            <option value="&gt;=">大于等于</option>
+                            <option value="=">等于</option>
+                            <option value="&lt;">小于</option>
+                            <option value="&lt;=">小于等于</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="huim">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="huim_alarm" class="col-sm-4 col-form-label">动作:</label>
+                    <div class="col-sm-4">
+                        <select id="huim_alarm_action" class="form-control">
+                            <option value="0">蜂鸣报警</option>
+                            <option value="1">语音报警</option>
+                            <option value="2">邮件通知</option>
+                        </select>
+                    </div>
+                    <a type="button" class="btn btn-success" style="margin-left:10px"
+                        id="set_huim_alarm">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                </div>
+                <br>
+                <strong>温湿度补偿设置:</strong>
+                <hr>
+                <div class="form-group row">
+                    <label for="gps_time" class="col-sm-4 col-form-label">温湿度补偿:</label>
+                    <div class="col-sm-2">
+                        温度:<input type="text" class="form-control" id="temp_calc">
+                    </div>
+                    <div class="col-sm-2">
+                        湿度:<input type="text" class="form-control" id="huim_calc">
+                    </div>
+                    <div class="col-sm-2">
+                        &nbsp;<a type="button" data-toggle="tooltip" title="" class="btn btn-warning"
+                            id="set_dht_calc">&nbsp;&nbsp;测&nbsp;&nbsp;&nbsp;试&nbsp;&nbsp;</a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="_about">
+                <!-- <h3 style="color: darkcyan;">ESP32 多功能桌面气象站</h3> -->
+                <br>
+                <p>使用文档位置: <a href="https://xfdr0805.github.io" target="_blank">电梯直达</a></p>
+                <p>如果不能访问,请访问这个连接: <a href="https://xfdr0805.gitee.io" target="_blank">准备起飞</a></p>
+                <br>
+                <br>
+
+                <p style="color: darkcyan;">导入导出配置文件 --- 暂未实现</p>
+                <a type="button" class="btn btn-success" style="margin-left:10px" id="export">导出配置</a>
+                <br>
+                <br>
+                <a type="button" class="btn btn-success" style="margin-left:10px" id="import">导入配置</a>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label for="confirm" class="col-sm-4 col-form-label"></label>
+            <div class="col-sm-6">
+                <a type="button" class="btn btn-info" id="confirm">&nbsp;&nbsp;提&nbsp;&nbsp;&nbsp;交&nbsp;&nbsp;</a>
+                <a type="button" class="btn btn-danger" style="margin-left: 60px;"
+                    id="restart">&nbsp;&nbsp;重&nbsp;&nbsp;&nbsp;启&nbsp;&nbsp;</a>
+            </div>
+        </div>
+    </div>
+    <div style="height: 60px;"> </div>
+    <footer class="footer">
+        <div class="container">
+            <div style="text-align: center">Copyright 2020-2030 xfdr0805 All Rights Reserved.</div>
+        </div>
+    </footer>
+    <script src="https://widget.heweather.net/standard/static/js/he-standard-common.js?v=1.1"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/layer.js"></script>
+    <script src="https://s1.pstatp.com/cdn/expire-1-M/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="https://s3.pstatp.com/cdn/expire-1-M/bootstrap-slider/10.6.1/bootstrap-slider.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script
+        src="https://s2.pstatp.com/cdn/expire-1-M/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script src="https://s0.pstatp.com/cdn/expire-1-M/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
+
+</body>
+
+<script>
+    var cnt_rtc = 0;
+    var cnt_ntp = 0;
+    $(document).ready(function () {
+        WIDGET = {
+            CONFIG: {
+                "layout": 1,
+                "width": 575,
+                "height": 150,
+                "background": 1,
+                "dataColor": "FFFFFF",
+                "borderRadius": 5,
+                "key": "165c030ef5484bc9a3781a339b125a3e"
+            }
+        }
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            // 获取已激活的标签页的名称
+            var activeTab = $(e.target).text();
+            // 获取前一个激活的标签页的名称
+            var previousTab = $(e.relatedTarget).text();
+            $(".active-tab span").html(activeTab);
+            $(".previous-tab span").html(previousTab);
+        });
+        //HTML 转为javascript字符
+        //https://www.html.cn/tool/html2js/
+        for (var i = 1; i <= 10; i++) {
+            var to_do_list = ["<div class=\"form-group row\">",
+                "                    <label class=\"col-sm-2 col-form-label\">" + i + ".</label>",
+                "                    <div class=\"col-sm-8\">",
+                "                        <input type=\"text\" placeholder=\"长度不超过60个英文字符或30个中文\" class=\"form-control\"maxlength=\"60\"id=\"to_do_list_" +
+                i + "\"></input>",
+                "                    </div>",
+                "                </div>"
+            ].join("");
+            $("#to_do_list").append(to_do_list);
+        }
+
+        for (var i = 1; i <= 6; i++) {
+            var str_alarm = ["<tr>",
+                "                                <td>闹钟" + i + "</td>",
+                "                                <td>",
+                "                                    <input type=\"checkbox\" checked id=\"status_" + i +
+                "\" />",
+                "                                </td>",
+                "                                <td>                    ",
+                "                                    <select class=\"form-control\" id=\"mode_" + i + "\">",
+                "                                        <option value=\"repeat\">每天</option>",
+                "                                        <option value=\"once\">单次</option>",
+                "                                    </select>  ",
+                "                                </td>",
+                "                                <td><div class=\"input-group\"><input type=\"text\" value=\"\" class=\"form-control\" id=\"date_" +
+                i + "\"></div></td>",
+                "                                <td><div class=\"input-group\"><input type=\"text\" value=\"\" class=\"form-control\" id=\"time_" +
+                i + "\"></div></td>",
+                "                            </tr>"
+            ].join("");
+            $("#alarm_list").append(str_alarm);
+        }
+        //属性选择器
+        //https://www.runoob.com/jquery/jquery-ref-selectors.html
+        $("input[id^='status'],#temp_alarm,#huim_alarm,#voice_status,#gps_status").bootstrapSwitch({
+            onText: "ON", // 设置ON文本 ?
+            offText: "OFF", // 设置OFF文本 ?
+            onColor: "success", // 设置ON文本颜色 ? ? (info/success/warning/danger/primary) ?
+            offColor: "danger", // 设置OFF文本颜色 ? ? ? ?(info/success/warning/danger/primary) ?
+            size: "small", // 设置控件大小,从小到大 ?(mini/small/normal/large) ?
+            // 当开关状态改变时触发 ?
+            onSwitchChange: function (event, state) {
+                if (state == true) {
+                    //layer.alert("ON");
+                    $(this).val(true);
+                } else {
+                    //layer.alert("OFF");
+                    $(this).val(false);
+                }
+            }
+        });
+        for (var i = 1; i <= 6; i++) {
+            $("#time_" + i).datetimepicker({
+                format: 'HH:mm:ss',
+                locale: moment.locale('zh-CN')
+            });
+            $("#date_" + i).datetimepicker({
+                format: 'YYYY-MM-DD',
+                locale: moment.locale('zh-CN'),
+            });
+            // if ($("#mode_" +i).val() == "repeat") {
+            //     //format = 'HH:mm:ss';
+            //     $("#date_" +i).css({"text-decoration":"line-through","color":"red"});
+            // } else {
+            //     //format = 'YYYY-MM-DD HH:mm:ss';
+            //     $("#date_" +i).css({"text-decoration":"none","color":"black"});
+
+            // }
+
+        }
+        $("#is_auto_location").bootstrapSwitch({
+            onText: "ON", // 设置ON文本 ?
+            offText: "OFF", // 设置OFF文本 ?
+            onColor: "success", // 设置ON文本颜色 ? ? (info/success/warning/danger/primary) ?
+            offColor: "danger", // 设置OFF文本颜色 ? ? ? ?(info/success/warning/danger/primary) ?
+            size: "small", // 设置控件大小,从小到大 ?(mini/small/normal/large) ?
+            // 当开关状态改变时触发 ?
+            onSwitchChange: function (event, state) {
+                if (state == true) {
+                    //layer.alert("ON");
+                    $(this).val(true);
+                    $("#auto_location").hide();
+                } else {
+                    //layer.alert("OFF");
+                    $(this).val(false);
+                    $("#auto_location").show();
+                }
+            }
+        });
+        $("input[id^='date']").click((e) => {
+            //console.log(e.target.id);
+            var index = e.target.id.substring(e.target.id.indexOf('_') + 1, e.target.id.length);
+            console.log(index);
+            if ($("#mode_" + index).val() == "repeat") {
+                //format = 'HH:mm:ss';
+                console.log("aaaa");
+                $("#date_" + index).css({
+                    "text-decoration": "line-through",
+                    "color": "red"
+                });
+            } else {
+                //format = 'YYYY-MM-DD HH:mm:ss';
+                $("#date_" + index).css({
+                    "text-decoration": "none",
+                    "color": "black"
+                });
+                console.log("bbbb");
+            }
+        });
+        $("select[id^='mode_']").change((e) => {
+            console.log(e.target.id);
+            var index = e.target.id.substring(e.target.id.indexOf('_') + 1, e.target.id.length);
+            console.log(index);
+            if ($("#mode_" + index).val() == "repeat") {
+                //format = 'HH:mm:ss';
+                console.log("aaaa");
+                $("#date_" + index).css({
+                    "text-decoration": "line-through",
+                    "color": "red"
+                });
+            } else {
+                //format = 'YYYY-MM-DD HH:mm:ss';
+                $("#date_" + index).css({
+                    "text-decoration": "none",
+                    "color": "black"
+                });
+                console.log("bbbb");
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: "/get_config",
+            data: "",
+            dataType: 'json',
+            success: function (data) {
+                $("#ssid").val(data["wifi"]["ssid"]);
+                $("#password").val(data["wifi"]["password"]);
+                $("#email_host").val(data["email"]["host"]);
+                $("#email_port").val(data["email"]["port"]);
+                $("#email_user").val(data["email"]["username"]);
+                $("#email_pwd").val(data["email"]["password"]);
+                $("#email_rcv").val(data["email"]["receiver"]);
+                $("#is_auto_location").bootstrapSwitch('state', data["weather"][
+                    "is_auto_location"
+                ]);
+                data["weather"]["is_auto_location"] ? $("#auto_location").hide() : $(
+                    "#auto_location").show();
+
+                $("#city_location").val(data["weather"]["location"]);
+                $("#city_name").val(data["weather"]["city_name"]);
+                $("#app_key").val(data["weather"]["app_key"]);
+                $("#server").val(data["ntp_server"]);
+                $("#update_period").val(parseInt(data["weather"]["update_period"]) / 60);
+
+                for (var i = 1; i <= 6; i++) {
+                    $("#status_" + i).bootstrapSwitch('state', data["alarm"]["alarm" + i][
+                        "status"
+                    ]);
+                    $("#mode_" + i).val(data["alarm"]["alarm" + i]["mode"]);
+                    $("#date_" + i).val(data["alarm"]["alarm" + i]["date"]);
+                    $("#time_" + i).val(data["alarm"]["alarm" + i]["time"]);
+                    if ($("#mode_" + i).val() == "repeat") {
+                        $("#date_" + i).css({
+                            "text-decoration": "line-through",
+                            "color": "red"
+                        });
+                    } else {
+                        $("#date_" + i).css({
+                            "text-decoration": "none",
+                            "color": "black"
+                        });
+                    }
+                }
+                //$("#status").prop("checked", data["alarm"]["status"]);
+                //$("#temp_alarm").prop("checked", data["dht_sensor"]["temp_alarm"]);
+                //$("#huim_alarm").prop("checked", data["dht_sensor"]["huim_alarm"]);
+                //$("#status").bootstrapSwitch('state', data["alarm"]["status"]);
+                $("#temp_alarm").bootstrapSwitch('state', data["dht_sensor"]["temp_alarm"]);
+                $("#huim_alarm").bootstrapSwitch('state', data["dht_sensor"]["huim_alarm"]);
+                $("#temp").val(data["dht_sensor"]["temp"]);
+                $("#temp_calc").val(data["dht_sensor"]["temp_calc"]);
+                $("#temp_exp").val(data["dht_sensor"]["temp_exp"]);
+                $("#temp_alarm_action").val(data["dht_sensor"]["temp_alarm_action"]);
+                $("#huim").val(data["dht_sensor"]["huim"]);
+                $("#huim_calc").val(data["dht_sensor"]["huim_calc"]);
+                $("#huim_exp").val(data["dht_sensor"]["huim_exp"]);
+                $("#huim_alarm_action").val(data["dht_sensor"]["huim_alarm_action"]);
+                $("#date").val(data["alarm"]["date"]);
+                $("#time").val(data["alarm"]["time"]);
+                $("#tips").val(data["tips"]);
+                var id = "#to_do_list_";
+                for (var i = 1; i <= 10; i++) {
+                    $(id + i).val(data["to_do_list"][i - 1]);
+                }
+                $("#brightness_time").data('slider').setValue(data["brightness"][
+                    "brightness_time"
+                ]);
+                $("#brightness1").data('slider').setValue(data["brightness"]["brightness1"]);
+                $("#brightness2").data('slider').setValue(data["brightness"]["brightness2"]);
+                $("#voice-slider").data('slider').setValue(data["voice"]["time"]);
+                $("#voice_status").bootstrapSwitch('state', data["voice"]["status"]);
+                //GPS
+                $("#gps_status").bootstrapSwitch('state', data["gps"]["status"]);
+                $("#gps_update_time").val(parseInt(data["gps"]["update_period"]) / 60);
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $("#voice-slider").slider({
+        min: 0,
+        max: 23,
+        value: [7, 21],
+        tooltip: 'always',
+        formatter: function (value) {
+            return '播报时段: ' + value[0] + '点-' + value[1] + "点";
+        }
+    });
+
+    $('#brightness1,#brightness2').slider({
+        min: 0,
+        max: 100,
+        value: 50,
+        tooltip: 'always',
+        formatter: function (value) {
+            return '亮度: ' + value;
+        }
+    });
+    $('#brightness_time').slider({
+        min: 0,
+        max: 23,
+        value: [6, 22],
+        tooltip: 'always',
+        formatter: function (value) {
+            return value[0] + '点-' + value[1] + "点";
+        }
+    });
+    $("#set_voice").click(function () {
+        $.ajax({
+            type: 'POST',
+            url: "/set_voice",
+            data: "{}",
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    //layer.msg("参数保存成功")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_brightness').on("click", function () {
+        console.log("亮度1:" + $("#brightness1").data('slider').getValue());
+        console.log("亮度2:" + $("#brightness2").data('slider').getValue());
+        var brightness = {
+            'brightness_time': $('#brightness_time').data('slider').getValue(),
+            'brightness1': parseInt($("#brightness1").data('slider').getValue()),
+            'brightness2': parseInt($("#brightness2").data('slider').getValue()),
+        };
+        $.ajax({
+            type: 'POST',
+            url: "/set_brightness",
+            data: JSON.stringify(brightness),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("成功")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    })
+    $("#rtc_time").datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss',
+        locale: moment.locale('zh-CN'),
+    });
+    $("#set_rtc_time").click(function () {
+        var date_time = $("#rtc_time").val();
+        var dat = new Date(date_time);
+        //console.log(date.toDateString().substring(date.toDateString().indexOf(" ")+1));
+        var date = dat.toDateString().substring(dat.toDateString().indexOf(" ") + 1);
+        var time = date_time.substring(11);
+        //console.log(time);
+        //转换成ISO标准格式，方便调整时间
+        var date_time = {
+            'date': date,
+            'time': time,
+        };
+        $.ajax({
+            type: 'POST',
+            url: "/set_rtc",
+            data: JSON.stringify(date_time),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("RTC修改成功！");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    // $('#brightness').on("change", function (event) {
+    //     console.log("value:" + event.value.oldValue);
+    // })
+    $('#set_tips').click(function () {
+        var tips = {
+            'tips': $("#tips").val(),
+        };
+        $.ajax({
+            type: 'POST',
+            url: "/set_tips",
+            data: JSON.stringify(tips),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("成功！")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_to_do_list').click(function () {
+        var array = new Array();
+        var id = "#to_do_list_";
+        for (var i = 1; i <= 10; i++) {
+            array[i - 1] = $(id + i).val();
+        }
+        var to_do_list = {
+            'to_do_list': array,
+        };
+        console.log(to_do_list);
+        $.ajax({
+            type: 'POST',
+            url: "/set_to_do_list",
+            data: JSON.stringify(to_do_list),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("成功！")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_alarm').click(function () {
+        var alarm_list = {};
+        for (var i = 1; i <= 6; i++) {
+            var status = $("#status_" + i).prop("checked");
+            var mode = $("#mode_" + i).val();
+            var date = $("#date_" + i).val();
+            var time = $("#time_" + i).val();
+            alarm_list["alarm" + i] = {
+                "status": status,
+                "mode": mode,
+                "date": date,
+                "time": time
+            };
+        }
+        var alarm = {
+            "alarm": alarm_list
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/set_alarm",
+            data: JSON.stringify(alarm),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功!");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_temp_alarm').click(function () {
+        var temp_alarm = {
+            "temp_exp": $("#temp_exp").val(),
+            "temp": parseInt($("#temp").val()),
+            "temp_alarm": $("#temp_alarm").val() == "true" ? true : false,
+            "temp_alarm_action": $("#temp_alarm_action").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/set_temp_alarm",
+            data: JSON.stringify(temp_alarm),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功!");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_huim_alarm').click(function () {
+        var huim_alarm = {
+            "huim_exp": $("#huim_exp").val(),
+            "huim": parseInt($("#huim").val()),
+            "huim_alarm": $("#huim_alarm").val() == "true" ? true : false,
+            "huim_alarm_action": $("#huim_alarm_action").val()
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/set_huim_alarm",
+            data: JSON.stringify(huim_alarm),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功!");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_dht_calc').click(function () {
+        var dht_calc = {
+            "temp_calc": parseFloat($("#temp_calc").val()),
+            "huim_calc": parseFloat($("#huim_calc").val()),
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/set_dht_calc",
+            data: JSON.stringify(dht_calc),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功!");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#set_email').click(function () {
+        var email_cfg = {
+            "host": $("#email_host").val(),
+            "port": parseInt($("#email_port").val()),
+            "username": $("#email_user").val(),
+            "password": $("#email_pwd").val(),
+            "receiver": $("#email_rcv").val()
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/set_email",
+            data: JSON.stringify(email_cfg),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功!");
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+    $('#restart').click(function () {
+        $.ajax({
+            type: 'POST',
+            url: "/restart",
+            data: "",
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("执行成功")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+
+    function strlen(str) {
+        var len = 0;
+        for (var i = 0; i < str.length; i++) {
+            var c = str.charCodeAt(i);
+            //单字节加1
+            if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+                len++;
+            } else {
+                len += 2;
+            }
+        }
+        return len;
+    }
+
+
+    $("#check").click(function () {
+        var location = $("#city_location").val();
+        var app_key = $("#app_key").val();
+        //console.log(location);
+        console.log(app_key);
+        var url = "https://search.heweather.net/find?" + "key=" + app_key + "&location=" + location;
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            success: function (data) {
+                if (data["HeWeather6"][0]["status"] == "ok") {
+                    var name = data["HeWeather6"][
+                            0
+                        ][
+                            "basic"
+                        ][0][
+                            "admin_area"
+                        ] +
+                        " " + data["HeWeather6"][0]["basic"][0]["parent_city"] +
+                        " " + data["HeWeather6"][0]["basic"][0]["location"];
+                    $("#city_name").val(name);
+                } else {
+                    layer.alert(data["HeWeather6"][0]["status"]);
+
+                }
+            },
+            error: function (data) {
+                layer.alert("请求失败!");
+            },
+        });
+    });
+    $('#confirm').click(function () {
+        var ssid = $("#ssid").val();
+        var password = $("#password").val();
+        var city_location = $("#city_location").val();
+        var city_name = $("#city_name").val();
+        var app_key = $("#app_key").val();
+        var tips = $("#tips").val();
+        var brightness = {
+            'brightness_time': $('#brightness_time').data('slider').getValue(),
+            'brightness1': parseInt($("#brightness1").data('slider').getValue()),
+            'brightness2': parseInt($("#brightness2").data('slider').getValue()),
+        };
+        var voice_time = $("#voice-slider").data('slider').getValue();
+        var update_period = parseInt($("#update_period").val()) * 60;
+        if (strlen(city_name) > 16) {
+            layer.msg("坐标名称长度过长<br>不能超过8个中文或16个英文字符！")
+            return;
+        }
+        if (strlen(tips) > 40) {
+            layer.msg("备忘录内容过长,<br>不能超过20个中文或40个英文字符！")
+            return;
+        }
+        var alarm_list = {};
+        for (var i = 1; i <= 6; i++) {
+            var status = $("#status_" + i).prop("checked");
+            var mode = $("#mode_" + i).val();
+            var date = $("#date_" + i).val();
+            var time = $("#time_" + i).val();
+            alarm_list["alarm" + i] = {
+                "status": status,
+                "mode": mode,
+                "date": date,
+                "time": time
+            };
+        }
+        console.log(alarm_list);
+
+        var array = new Array();
+        var id = "#to_do_list_";
+        for (var i = 1; i <= 10; i++) {
+            array[i - 1] = $(id + i).val();
+        }
+
+        var config = {
+            "weather": {
+                "location": city_location,
+                "app_key": app_key,
+                "update_period": update_period,
+                "city_name": city_name,
+                "is_auto_location": $("#is_auto_location").prop("checked")
+            },
+            "wifi": {
+                "ssid": ssid,
+                "password": password
+            },
+            "alarm": alarm_list,
+            "email": {
+                "host": $("#email_host").val(),
+                "port": parseInt($("#email_port").val()),
+                "username": $("#email_user").val(),
+                "password": $("#email_pwd").val(),
+                "receiver": $("#email_rcv").val()
+            },
+            "dht_sensor": {
+                "temp_exp": $("#temp_exp").val(),
+                "temp": parseInt($("#temp").val()),
+                "temp_calc": parseFloat($("#temp_calc").val()),
+                "temp_alarm": $("#temp_alarm").val() == "true" ? true : false,
+                "temp_alarm_action": $("#temp_alarm_action").val(),
+                "huim_exp": $("#huim_exp").val(),
+                "huim": parseInt($("#huim").val()),
+                "huim_calc": parseFloat($("#huim_calc").val()),
+                "huim_alarm": $("#huim_alarm").val() == "true" ? true : false,
+                "huim_alarm_action": $("#huim_alarm_action").val()
+            },
+            "to_do_list": array,
+            "default_page": $("#default_page").val(),
+            "tips": tips,
+            "brightness": brightness,
+            "voice": {
+                "time": voice_time,
+                "status": $("#voice_status").prop("checked")
+            },
+            "gps": {
+                "status": $("#gps_status").prop("checked"),
+                "update_period": parseInt($("#gps_update_time").val()) * 60
+            }
+
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/set_config",
+            data: JSON.stringify(config),
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "success") {
+                    layer.msg("参数保存成功,重启后生效！")
+                }
+            },
+            error: function (data) {
+                console.log('获取数据失败！');
+            },
+        });
+    });
+</script>
+</body>
+
+</html>

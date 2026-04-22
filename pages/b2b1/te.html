@@ -1,0 +1,136 @@
+---
+title: 固件更新记录---持续更新
+tags:
+  - ESP32
+  - firmware
+categories: ESP32桌面气象站-LCD触控版
+abbrlink: 3b86
+date: 2020-12-26 13:02:49
+---
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>固件更新记录时间轴</title>
+	<link rel="stylesheet" href="style.css" />
+	<style type="text/css">
+		h2.top_title {
+			border-bottom: none;
+			background: none;
+			text-align: center;
+			line-height: 32px;
+			font-size: 20px
+		}
+
+		h2.top_title span {
+			font-size: 12px;
+			color: #666;
+			font-weight: 500
+		}
+	</style>
+</head>
+
+<body>
+	<h2 class="top_title"><a href="javascript:void(0);">4.0触屏版</a><br /></h2>
+	<section id="cd-timeline" class="cd-container">
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-code">
+				<img src="/posts/3b86/img/cd-icon-code.svg" style="margin-left:-12px;margin-top:-12px"
+					alt="CODE">
+			</div>
+			<div class="cd-timeline-content">
+				<h2>V1.0.9</h2>
+				<p>+ 外壳更改为压克力，这样不会再影响温湿度传感器</p>
+				<p>+ 添加旋转太空人，随机变颜色</p>
+				<p>+ 添加自动定位当前城市功能</p>
+				<p>+ 修复闰年平年错误问题(跨年才发现 ^_^)</p>
+				<p>+ 添加GPS速度仪表盘功能，仅GPS版有</p>
+				<p>+ 修复其它已知错误</p>
+				<p><a href="/posts/3b86/CODE-ESP32-L4-1-0-9.bin">点击下载</a></p>
+				<span class="cd-date">2022/02/09</span>
+			</div>
+		</div>
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-code">
+				<img src="/posts/3b86/img/cd-icon-code.svg" style="margin-left:-12px;margin-top:-12px"
+					alt="CODE">
+			</div>
+			<div class="cd-timeline-content">
+				<h2>V1.0.7</h2>
+				<p>+ 增加了微信扫码配网,在启动时可以选择热点配网和一键配网</p>
+				<p>+ 增加温湿度补偿功能，由于传感器封在壳子里及设备发热等因素，会比实际值偏高一点</p>
+				<p><a href="/posts/3b86/flasher-esp32-t4-1-0-7.exe">点击下载</a></p>
+				<p style="color: red;">*注意:软件为x64位平台，不支持32位平台，需要python3运行环境 </p>
+				<p style="color: red;">*注意:软件可能会被杀毒软件拦截，请放行 </p>
+				<span class="cd-date">2021/01/23</span>
+			</div>
+		</div>
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-code">
+				<img src="/posts/3b86/img/cd-icon-code.svg" style="margin-left:-12px;margin-top:-12px"
+					alt="CODE">
+			</div>
+			<div class="cd-timeline-content">
+				<h2>V1.0.6</h2>
+				<p>+ 数字时钟界面增加温度及节日，界面变化在设备界面展示那一个文档展示</p>
+				<p>+ 优化未来6天温度趋势图的显示</p>
+				<p>+ 优化GPS对时逻辑 第一次对时成功会滴一声</p>
+				<p>+ 增加PCF8563 or BM8563 RTC支持</p>
+				<p>- 修改在没有网络时不再自动进入热点模式 没有网络也可以使用</p>
+				<p>+ 启动界面添加倒计时功能 在启动时可以按下下载键进入热点配网模式</p>
+				<p><a href="#">点击下载</a></p>
+				<span class="cd-date">2021/01/14</span>
+			</div>
+		</div>
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-code">
+				<img src="/posts/3b86/img/cd-icon-code.svg" style="margin-left:-12px;margin-top:-12px"
+					alt="CODE">
+			</div>
+			<div class="cd-timeline-content">
+				<h2>V1.0.5</h2>
+				<p>+ 增加启动时自动检查版本更新，由于固件太大，无法OTA，请下载后通过串口更新 </p>
+				<p>+ 添加烧录软件，无需进行任何设置即可更新程序，见下载连接 </p>
+				<p>+ 增加GPS数据解析，实现GPS对时功能</p>
+				<p>+ 增加启动时自动检查版本及更新记录</p>
+				<p>+ 硬件电路增加一键自动下载功能</p>
+				<p>+ 添加主界面月相名称显示</p>
+				<p>+ 增加5组闹钟，共计支持6组闹钟</p>
+				<p>- 修复不在闹钟界面时，闹钟不响的问题</p>
+				<p>- 闹钟响时，点击一下屏幕即可关闭</p>
+				<p>- 增加阴历节日及倒计时功能</p>
+				<p>- 修复温度曲线显示会超出显示范围问题</p>
+				<p>+ 增加背光依据设定时间自动调整功能</p>
+				<p><a href="#">点击下载</a></p>
+				<span class="cd-date">2021/01/03</span>
+			</div>
+		</div>
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-code">
+				<img src="/posts/3b86/img/cd-icon-code.svg" style="margin-left:-12px;margin-top:-12px"
+					alt="CODE">
+			</div>
+
+			<div class="cd-timeline-content">
+				<h2>V1.0.4</h2>
+				<p>- 修复到达一年中最后一个节日 进入含有节日倒计时的界面导致重启的问题 </p>
+				<p>+ 在万年历界面的节日倒计时，添加当天的节日显示 </p>
+				<p>- 修复语音不能正确报时的问题 开机会播报一下当前时段</p>
+				<p>+ 在web配置界面->其它->语音报时下增加一个播报开关，并添加一个测试按钮，点击会播报当时的小时 </p>
+				<p>- 修复邮件通知导致系统重启问题,邮件默认使用xfdr0805@126.com发送邮件，可以更换成你自己的邮箱，接收邮箱格式 `名称:826220967@qq.com`
+					前边的名称是后边对应邮箱地址的别名，里边的分号必须是英文的分号 推荐使用QQ邮箱 因为可以在微信及时收到 </p>
+				<p>- 由于配置文件变化 这两个文件都要更新 </p>
+				<p><a href="#">CODE点击下载</a></p>
+				<p><a href="#">SPIFFS点击下载</a></p>
+				<span class="cd-date">2020-12-26</span>
+			</div>
+		</div>
+	</section>
+
+
+</body>
+
+</html>
