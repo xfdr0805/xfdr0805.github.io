@@ -1,5 +1,5 @@
 ﻿{
-    "version":  "1.0.0.5",
+    "version":  "1.0.0.6",
     "url":  "https://xfdr0805.github.io/software/sgl/SglDesigner.zip",
     "changelog":  "https://xfdr0805.github.io/software/sgl/changelog.txt",
     "mandatory":  {
@@ -8,7 +8,7 @@
                       "mode":  1
                   },
     "checksum":  {
-                     "value":  "FA49F2AB63A33FFFB00D0A2E8E40EB2E68936F8E",
+                     "value":  "161E06D261D668B09B27CB947DE55C198053DBD8",
                      "hashingAlgorithm":  "SHA1"
                  }
 }
